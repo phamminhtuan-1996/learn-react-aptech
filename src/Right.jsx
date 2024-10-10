@@ -1,6 +1,6 @@
 function Right() {
     return (
-        <div className="container">
+        <div className="right">
             <h1>Right</h1>
         </div>
     )

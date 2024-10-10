@@ -1,6 +1,6 @@
 function Center() {
     return (
-        <div className="container">
+        <div className="center">
             <h1>Center</h1>
         </div>
     )

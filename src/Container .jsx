@@ -1,8 +1,14 @@
 
+import Left from './Left'
+import Center from './Center'
+import Right from './Right'
+
 function Container() {
     return (
         <div className="container">
-            <h1>container</h1>
+            <Left/>
+            <Center/>
+            <Right/>
         </div>
     )
 }
