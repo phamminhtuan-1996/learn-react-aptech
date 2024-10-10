@@ -23,10 +23,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 2px solid black;
 }
 
 .left {
   background-color: #2ecc71;
+  flex-direction: column;
 }
 .center {
   background-color: #e67e22;
