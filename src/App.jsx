@@ -1,33 +1,41 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// data
+import { 
+  newsItem,
+  videoMaiDora, 
+  newItemTwo,
+  listSlideTopNews, 
+  listSliderNews,
+  listItemBreakNews,
+  listItemNewsZone,
+} from './data.js';
+// component
+import Header from './components/Header';
+import ContentMain from './components/ContentMain';
+import NewsTop from './components/NewsTop';
+import SlideNews from './components/SlideNews'
+import NewsItemHorizontal from './components/NewsItemHorizontal';
+import NewsItemVideo from './components/NewsItemVideo.jsx';
+import BreakNews from './components/BreakNews.jsx';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Header />
+      <ContentMain>
+        <NewsTop/>
+        <SlideNews data={listSlideTopNews} />
+        <div className="horizontal-line"></div>
+        {newsItem.map((item, key) => (
+          <NewsItemHorizontal key={key} {...item}/>
+        ))}
+        <NewsItemVideo {...videoMaiDora} />
+        {newItemTwo.map((item, key) => (
+          <NewsItemHorizontal key={key} {...item}/>
+        ))}
+        <SlideNews data={listSliderNews} className="twond" />
+      </ContentMain>
+      <BreakNews dataBreakNews={listItemBreakNews} dataZoneNews={listItemNewsZone}/>
     </>
   )
 }
