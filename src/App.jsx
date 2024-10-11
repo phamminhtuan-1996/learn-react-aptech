@@ -36,6 +36,11 @@ function App() {
         <SlideNews data={listSliderNews} className="twond" />
       </ContentMain>
       <BreakNews dataBreakNews={listItemBreakNews} dataZoneNews={listItemNewsZone}/>
+      <ContentMain isShowContentRight={false}>
+        {newsItem.map((item, key) => (
+            <NewsItemHorizontal key={key} {...item}/>
+        ))}
+      </ContentMain>
     </>
   )
 }
