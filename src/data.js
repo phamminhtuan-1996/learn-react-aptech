@@ -64,6 +64,23 @@ export const newItemTwo = [
       }            
 ];
 
+export const listItem3nd = [
+  {
+    "title": "Mỹ nam quá đẹp gây sốt MXH Việt, body cực phẩm xứng đáng phong thần",
+    "img": "https://kenh14cdn.com/zoom/250_156/203336854389633024/2024/10/11/honeycam-2024-10-11-14-55-02-17286353164511213965435-25-82-553-927-crop-17286353403391154026342.gif.png",
+    "category": "Cine",
+    "time": "2024-10-11T20:38:00",
+    "description": "Mỹ nam này đang là cái tên nổi tiếng tại Việt Nam bởi sự trở lại ấn tượng ở một tựa phim hot."
+  },
+  {
+    "title": "Ái nữ nổi tiếng phơi bày cuộc sống trong \"nội trú\" Chị Đẹp, khó chịu ra mặt với Ngọc Phước?",
+    "img": "https://kenh14cdn.com/zoom/250_156/203336854389633024/2024/10/11/snaptikapp7422257362498505991-ezgifcom-crop-17286234822172011743228-0-0-359-574-crop-1728623496632634923943.gif",
+    "category": "Đời sống",
+    "time": "2024-10-11T20:00:00",
+    "description": 'Mới được hé lộ song cuộc sống trong "nhà chung" đã lắm drama!'
+  }
+]
+
 // data slide
 export const listSlideTopNews = [
     {
@@ -153,6 +170,29 @@ export const listItemNewsZone = [
   {
       "title": "Thấy gì từ tranh cãi quanh hiện tượng mạng trêu vợ nổi tiếng nhất hiện nay?",
       "imgUrl": "https://kenh14cdn.com/zoom/220_138/203336854389633024/2024/10/9/screen-shot-2024-10-09-at-153346-1728468100796567289054-0-0-968-1549-crop-1728468111061221058748.png"
+  }
+];
+
+export const listItemForyou = [
+  {
+      "imgUrl": "https://kenh14cdn.com/203336854389633024/2024/10/9/avatar1728482107362-172848210791983663489.jpg",
+      "title": "Lần đầu tiên, trường ĐH này của Việt Nam xếp chung bảng với ĐH Oxford: Tuổi đời hơn 1 thế kỷ, thi 9 điểm/môn vẫn chưa thể đỗ"
+  },
+  {
+      "imgUrl": "https://kenh14cdn.com/203336854389633024/2024/10/9/base64-17284811926842082414118-17284813008291017701173-0-74-698-1191-crop-1728481306428892332482.png",
+      "title": "Ông hoàng phim hành động Châu Nhuận Phát chia sẻ 4 bí quyết để “chung sống hòa bình” với bệnh tiểu đường ở tuổi 69"
+  },
+  {
+      "imgUrl": "https://kenh14cdn.com/203336854389633024/2024/10/10/avatar1728549446013-17285494463291595049877-0-0-1250-2000-crop-1728549463281588731134.png",
+      "title": "TP.HCM: Va chạm với xe trộn bê tông, 2 cô gái đi SH tử vong thương tâm"
+  },
+  {
+      "imgUrl": "https://kenh14cdn.com/203336854389633024/2024/10/10/photo1728527458219-17285274584631133807228-1728529930294695395243.jpg",
+      "title": "Sơ hở là săn sale: Giới trẻ biến những ngày sale thành "
+  },
+  {
+      "imgUrl": "https://kenh14cdn.com/203336854389633024/2024/10/10/avatar1728547657297-1728547658005902841159-0-10-400-650-crop-1728547704406849732825.gif",
+      "title": "Vợ bầu của Đặng Văn Lâm khoe chân dài thẳng tắp, lái xế hộp đi chơi, được mẹ chồng khen thông minh vì cách chăm sóc gia đình"
   }
 ]
 

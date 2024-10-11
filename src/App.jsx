@@ -8,6 +8,8 @@ import {
   listSliderNews,
   listItemBreakNews,
   listItemNewsZone,
+  listItem3nd,
+  listItemForyou,
 } from './data.js';
 // component
 import Header from './components/Header';
@@ -17,7 +19,7 @@ import SlideNews from './components/SlideNews'
 import NewsItemHorizontal from './components/NewsItemHorizontal';
 import NewsItemVideo from './components/NewsItemVideo.jsx';
 import BreakNews from './components/BreakNews.jsx';
-
+import NewsForYou from './components/NewsForYou.jsx'
 function App() {
   return (
     <>
@@ -37,10 +39,11 @@ function App() {
       </ContentMain>
       <BreakNews dataBreakNews={listItemBreakNews} dataZoneNews={listItemNewsZone}/>
       <ContentMain isShowContentRight={false}>
-        {newsItem.map((item, key) => (
+        {listItem3nd.map((item, key) => (
             <NewsItemHorizontal key={key} {...item}/>
         ))}
       </ContentMain>
+      <NewsForYou dataSlide={listItemForyou} />
     </>
   )
 }
