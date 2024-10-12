@@ -1,14 +1,13 @@
 import React from "react";
 
-function MenuSmallTop() {
+function MenuSmallTop({data = [] }) {
     return (
         <div className="menu-small-top">
         <div className="container">
             <ul className="menu-small-top__list">
-                <li><a href="#"><i className="fa fa-star" aria-hidden="true"></i> eMagazine</a></li>
-                <li><a href="#"><i className="fa fa-star" aria-hidden="true"></i> Genz Area</a></li>
-                <li><a href="#"><i className="fa fa-star" aria-hidden="true"></i> XANH chưa - check!!!</a></li>
-                <li><a href="#"><i className="fa fa-star" aria-hidden="true"></i> ShowLive</a></li>
+                {data && data.map((item, index) => (
+                    <li key={index}><a href="#"><i className="fa fa-star" aria-hidden="true" ></i> {item}</a></li>
+                ))}
             </ul>
             <div className="menu-small-top__search">
                 <input type="text" placeholder="Tìm kiếm" />

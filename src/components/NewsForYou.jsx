@@ -3,7 +3,7 @@ import SlideNews from './SlideNews'
 import indo from '../img/tiep-vien-hang-khong-indo.mp4';
 function NewsForYou({dataSlide = []}) {
     return (
-        <div class="container">
+        <div className="container">
             <div className="horizontal-line-grey"></div>
                 <div className="news-for-you-wrap">
                     <div className="news-for-you">

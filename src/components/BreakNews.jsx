@@ -19,7 +19,7 @@ function BreakNews({dataBreakNews = [], dataZoneNews = []}) {
                     <img className="w-100" src="https://event.mediacdn.vn/257767050295742464/image/embed/2024/5/21/genz-cover-17162681168831952005795.png" alt="" />
                     <div className="zone-right__list">
                         {dataZoneNews && dataZoneNews.map((item, index) => (
-                            <div className="zone-right__list--item">
+                            <div className="zone-right__list--item" key={index}>
                                 <img src={item.imgUrl} alt="" />
                                 <span>{item.title}</span>
                             </div>
