@@ -20,8 +20,7 @@ export default function ListUser() {
                     setUser([]);
                     return;
                 }
-                if (!res.length) {
-                    console.log(123)
+                if (!Array.isArray(res)) {
                     setUser([res]);
                     return;
                 }
