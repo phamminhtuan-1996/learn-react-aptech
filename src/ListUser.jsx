@@ -1,18 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form'
+import Form from 'react-bootstrap/Form';
+import {Context} from './utils/AppContext';
 
 export default function ListUser() {
+    const userContext = useContext(Context);
     const [user, setUser] = useState([]);
     const [valSeach, setValSearch] = useState('');
     const [isShowDataEmpty, setShowDataEmpty] = useState(true);
+    
     const handleInput = (event) => {
         setValSearch(event.target.value);
     }
     useEffect(() => {
         setShowDataEmpty(false);
-        fetch(`https://jsonplaceholder.typicode.com/users/${valSeach}`)
+        fetch(`https://jsonplaceholder.typicode.com/users/${userContext.valueInput}`)
             .then((res) => res.json())
             .then((res) => {
                 if (!res.name && !res.length) {
@@ -27,16 +30,11 @@ export default function ListUser() {
                 setShowDataEmpty(false);
                 setUser(res);
              })
-    }, [valSeach])
+    }, [userContext.valueInput])
     return (
         <Table striped bordered hover>
             <thead>
-                <tr>
-                    <th colSpan={5}>
-                        <Form.Label>Tìm kiếm</Form. Label>
-                        <Form.Control type="text" value={valSeach} placeholder="Nhập vào đây số id để tìm kiếm user vd: 1" onChange={handleInput}/>
-                    </th>
-                </tr>
+                
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
@@ -49,7 +47,7 @@ export default function ListUser() {
                 {user.length > 0 && user.map((item, index) => (
                      <tr key={index}>
                         <td>
-                            <Button variant='link' onClick={() => setValSearch(item.id)}>
+                            <Button variant='link' onClick={() => userContext.setValueInput(item.id)}>
                                 #{item.id}
                             </Button>
                         </td>
