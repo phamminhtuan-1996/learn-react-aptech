@@ -10,7 +10,7 @@ export default function InputFieldText() {
     }
     return (
         <>
-             <Form.Label>Tìm kiếm123</Form.Label>
+             <Form.Label>Tìm kiếm</Form.Label>
              <Form.Control type="text" value={userContext.valueInput} placeholder="Nhập vào đây số id để tìm kiếm user vd: 1" onChange={handleInput}/>
         </>
     )
