@@ -11,7 +11,6 @@ function App() {
   const [isEdit, setEdit] = useState(false);
   const getCategory = () => {
     fetch('https://671a4236acf9aa94f6a9e048.mockapi.io/category').then((res) => res.json()).then((res) => {
-      console.log(res);
       setCategory(res);
     })
   } 
@@ -54,7 +53,7 @@ function App() {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({name: findValue})
+      body: JSON.stringify({name: findValue?.name || ''})
     }).then((res) => {
       console.log(res);
       setEdit(false);
@@ -88,14 +87,13 @@ function App() {
           <tr key={index}>
             <td>{item.id}</td>
             <td>
-            {!isEdit && (
+            {!isEdit ? (
               <>
-                {item.name}
+                {item?.name ? item?.name : '' }
               </>
-            )}
-            {isEdit && (
+            ) : (
               <>
-                <Form.Control type="text" value={item.name} placeholder='input category' onChange={(e) => setValEdit(e.target.value, index)}/> 
+              <Form.Control type="text" value={item.name} placeholder='input category' onChange={(e) => setValEdit(e.target.value, index)}/> 
               </>
             )}
             </td>
