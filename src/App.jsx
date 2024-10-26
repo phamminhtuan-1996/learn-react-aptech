@@ -1,35 +1,52 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from "react";
+// api
+import product from "./api/product";
+
+// components
+import ListProductTable from "./components/ListProductTable";
+import Button from "react-bootstrap/Button";
+import ModalHandleProduct from "./components/ModalHandleProduct";
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const [listProduct, setListProduct] = useState([]);
+  const [isVisibleModalAdd, setVisibleModalAdd] = useState(false);
+  const getListProduct = async () => {
+    const getProduct = await product.listProduct();
+    if (!getProduct.ok) {
+      return;
+    }
+    const data = await getProduct.json();
+    setListProduct(data.reverse());
+  };
+  const addNewProduct = async (val) => {
+    const addProduct = await product.addProduct(val);
+    if (!addProduct.ok) {
+      return;
+    }
+    setListProduct([val, ...listProduct])
+    setVisibleModalAdd(false);
+  }
+  useEffect(() => {
+    getListProduct();
+  }, []);
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="d-flex justify-content-center py-4">
+        <Button variant="success" size="lg" size="lg" onClick={() => setVisibleModalAdd(true)}>
+          + Thêm
+        </Button>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <ListProductTable data={listProduct} />
+      <ModalHandleProduct
+        visible={isVisibleModalAdd}
+        acceptData={(val) => {
+          console.log('ModalHandleProduct val',val)
+          addNewProduct(val);
+        }}
+        handleClose={() => setVisibleModalAdd(false)}
+      />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
