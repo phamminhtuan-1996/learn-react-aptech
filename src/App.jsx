@@ -9,6 +9,8 @@ import ModalHandleProduct from "./components/ModalHandleProduct";
 
 function App() {
   const [listProduct, setListProduct] = useState([]);
+  const [dataFormEdit, setDataFormEdit] = useState(null);
+  const [idBeingEdited, setIdBeingEdited] = useState(-1);
   const [isVisibleModalAdd, setVisibleModalAdd] = useState(false);
   const getListProduct = async () => {
     const getProduct = await product.listProduct();
@@ -18,32 +20,88 @@ function App() {
     const data = await getProduct.json();
     setListProduct(data.reverse());
   };
-  const addNewProduct = async (val) => {
+  const handlAddNewProduct = async (val) => {
     const addProduct = await product.addProduct(val);
     if (!addProduct.ok) {
       return;
     }
-    setListProduct([val, ...listProduct])
+    const data = await addProduct.json();
+    setListProduct([data, ...listProduct]);
+    setVisibleModalAdd(false);
+  };
+  const handlRemoveProductItem = async (id) => {
+    const removeItem = await product.removeProduct(id);
+    if (!removeItem.ok) {
+      return;
+    }
+    setListProduct(listProduct.filter((item) => item.id !== id));
+    setVisibleModalAdd(false);
+  };
+
+  const handleGetItemProduct = async (id) => {
+    setIdBeingEdited(id);
+    const itemProduct = await product.getProductDetails(id);
+    if (!itemProduct.ok) {
+      return;
+    }
+    const data = await itemProduct.json();
+    setVisibleModalAdd(true);
+    setDataFormEdit(data);
+  }
+  const handlGetEditProduct = async (value) => {
+    const itemProduct = await product.editProduct(value);
+    if (!itemProduct.ok) {
+      return;
+    }
+    const data = await itemProduct.json();
+    const index = listProduct.findIndex((item) => item.id === String(idBeingEdited));
+    listProduct[index] = data;
+    setListProduct(listProduct);
     setVisibleModalAdd(false);
   }
+
   useEffect(() => {
     getListProduct();
   }, []);
+
+  useEffect(() => {
+    if (!isVisibleModalAdd && idBeingEdited > -1) {
+      setIdBeingEdited(-1);
+      setDataFormEdit(null);
+    }
+  }, [isVisibleModalAdd])
+
+
   return (
     <>
       <div className="d-flex justify-content-center py-4">
-        <Button variant="success" size="lg" size="lg" onClick={() => setVisibleModalAdd(true)}>
+        <Button
+          variant="success"
+          size="lg"
+          onClick={() => setVisibleModalAdd(true)}
+        >
           + Thêm
         </Button>
       </div>
-      <ListProductTable data={listProduct} />
+      <div className="px-5">
+        <ListProductTable
+          data={listProduct}
+          isEdit={idBeingEdited}
+          editProduct={handleGetItemProduct}
+          removeItem={handlRemoveProductItem}
+        />
+      </div>
+
       <ModalHandleProduct
         visible={isVisibleModalAdd}
-        acceptData={(val) => {
-          console.log('ModalHandleProduct val',val)
-          addNewProduct(val);
+        data={dataFormEdit}
+        idEdit={idBeingEdited}
+        acceptData={handlAddNewProduct}
+        acceptDataEdit={handlGetEditProduct}
+        handleClose={() => {
+          setDataFormEdit(null);
+          setVisibleModalAdd(false);
         }}
-        handleClose={() => setVisibleModalAdd(false)}
       />
     </>
   );

@@ -4,16 +4,10 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 
 
 export default function InputField({value = '', label= '', type= '', placeholder='', onChangeValue}) {
-    const [val, setVal] = useState('');
-    useEffect(() => {
-        setVal(value);
-    }, [value]);
-
-    useEffect(() => {
-        if (typeof onChangeValue === 'function') {
-            onChangeValue(val);
-        }
-    }, [val])
+    const handleInputChange = (event) => {
+        const newValue = event.target.value;
+        onChangeValue(newValue); 
+    }
     return (
         <div className='mb-4'>
             <FloatingLabel
@@ -23,11 +17,9 @@ export default function InputField({value = '', label= '', type= '', placeholder
             >
                 <Form.Control
                     type={type}
-                    value={val}
+                    value={value}
                     placeholder={placeholder}
-                    onChange={(e) => {
-                        setVal(e.target.value);
-                    }}
+                    onChange={handleInputChange}
                 />
             </FloatingLabel>
         </div>
