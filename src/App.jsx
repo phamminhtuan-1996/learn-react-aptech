@@ -29,13 +29,13 @@ function App() {
     setListProduct([data, ...listProduct]);
     setVisibleModalAdd(false);
   };
-  const handlRemoveProductItem = async (id) => {
-    const removeItem = await product.removeProduct(id);
-    if (!removeItem.ok) {
-      return;
-    }
-    setListProduct(listProduct.filter((item) => item.id !== id));
-    setVisibleModalAdd(false);
+  const handlRemoveProductItem = (id) => {
+    product.removeProduct(id).then((res) => {
+      if(!res.ok) {
+        return;
+      }
+      setListProduct((prev) => prev.filter((item) => item.id !== id));
+    })
   };
 
   const handleGetItemProduct = async (id) => {

@@ -10,11 +10,8 @@ export default function ListProductTable({
   removeItem,
 }) {
   const [ListProduct, SetProduct] = useState([]);
-  const [idRemove, setIDremove] = useState(-1);
-  const handleRemoveProduct = (id) => {
-    setIDremove(id);
-    removeItem(id);
-  };
+  const [listRemove, setListRemove] = useState([]);
+
   const formatUTCPlus7 = (val) => {
     let date = new Date(val);
     let result = [date.getDate(), date.getMonth(), date.getFullYear()].join(
@@ -28,9 +25,14 @@ export default function ListProductTable({
     result = result + " " + getTime;
     return result;
   };
+
+  const handleRemoveItem = (id) => {
+    removeItem(id);
+    setListRemove((prev) => ([...prev, id]));
+  }
   useEffect(() => {
     SetProduct(data);
-    setIDremove(-1);
+    setListRemove([]);
   }, [data]);
   return (
     <>
@@ -73,11 +75,11 @@ export default function ListProductTable({
                 </Button>
                 <Button
                   variant="danger"
-                  disabled={idRemove === item.id}
-                  onClick={() => handleRemoveProduct(item.id)}
+                  disabled={listRemove.includes(item.id)}
+                  onClick={() => handleRemoveItem(item.id)}
                 >
                   {/* Remove */}
-                  {idRemove === item.id ? "Remove..." : "Remove"}
+                  {listRemove.includes(item.id) ? "Remove..." : "Remove"}
                 </Button>
               </td>
             </tr>
