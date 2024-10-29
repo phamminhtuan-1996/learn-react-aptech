@@ -6,6 +6,7 @@ import product from "./api/product";
 import ListProductTable from "./components/ListProductTable";
 import Button from "react-bootstrap/Button";
 import ModalHandleProduct from "./components/ModalHandleProduct";
+import FormInput from './components/FormInput';
 
 function App() {
   const [listProduct, setListProduct] = useState([]);
@@ -74,25 +75,30 @@ function App() {
 
   return (
     <>
+    {!isVisibleModalAdd && (
       <div className="d-flex justify-content-center py-4">
-        <Button
-          variant="success"
-          size="lg"
-          onClick={() => setVisibleModalAdd(true)}
-        >
-          + Thêm
-        </Button>
-      </div>
-      <div className="px-5">
-        <ListProductTable
-          data={listProduct}
-          isEdit={idBeingEdited}
-          editProduct={handleGetItemProduct}
-          removeItem={handlRemoveProductItem}
-        />
-      </div>
-
-      <ModalHandleProduct
+      <Button
+        variant="success"
+        size="lg"
+        onClick={() => setVisibleModalAdd(true)}
+      >
+        + Thêm
+      </Button>
+    </div>
+    )} 
+      
+      {!isVisibleModalAdd && (
+        <div className="px-5">
+          <ListProductTable
+            data={listProduct}
+            isEdit={idBeingEdited}
+            editProduct={handleGetItemProduct}
+            removeItem={handlRemoveProductItem}
+          />
+        </div>
+      )}
+      
+      {/* <ModalHandleProduct
         visible={isVisibleModalAdd}
         data={dataFormEdit}
         idEdit={idBeingEdited}
@@ -102,7 +108,21 @@ function App() {
           setDataFormEdit(null);
           setVisibleModalAdd(false);
         }}
-      />
+      /> */}
+      {isVisibleModalAdd && (
+        <FormInput
+          visible={isVisibleModalAdd}
+          data={dataFormEdit}
+          idEdit={idBeingEdited}
+          acceptData={handlAddNewProduct}
+          acceptDataEdit={handlGetEditProduct}
+          handleClose={() => {
+            setDataFormEdit(null);
+            setVisibleModalAdd(false);
+          }}
+        />
+      )}
+      
     </>
   );
 }
