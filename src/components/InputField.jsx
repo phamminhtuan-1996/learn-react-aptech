@@ -17,6 +17,7 @@ export default function InputField({value = '', label= '', type= '', placeholder
             >
                 <Form.Control
                     type={type}
+                    required
                     value={value}
                     placeholder={placeholder}
                     onChange={handleInputChange}
