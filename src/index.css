@@ -6,3 +6,8 @@
 .table img {
   width: 200px;
 }
+
+.modal-backdrop.show {
+  background-color: white;
+  opacity: 1!important;
+}

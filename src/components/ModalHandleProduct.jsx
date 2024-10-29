@@ -69,7 +69,7 @@ export default function ModalHandleProduct({
   }, [visible, data]);
 
   return (
-    <Modal show={visible} onHide={handleClose}>
+    <Modal show={visible} onHide={handleClose} centered>
       <Modal.Header closeButton>
         <Modal.Title>{data ? "Edit data" : "Add Data"}</Modal.Title>
       </Modal.Header>
