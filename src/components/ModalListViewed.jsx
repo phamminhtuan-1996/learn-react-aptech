@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button, Modal, Card } from "react-bootstrap";
+import { toast } from 'react-toastify';
+
 
 export default function ModalListViewed({visible = false, emitClose}) {
     const [listViewed, setListViewed] = useState([]);
@@ -14,6 +16,7 @@ export default function ModalListViewed({visible = false, emitClose}) {
     const removeItem = (id) => {
         setListViewed(listViewed.filter((item) => item.id !== id));
         localStorage.setItem('list-viewed', JSON.stringify(listViewed.filter((item) => item.id !== id)));
+        toast('xoá dữ liệu thành công', {type: 'success'})
     }
     useEffect(() => {
         if (!visible) {

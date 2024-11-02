@@ -12,6 +12,7 @@ import GroupFilmSearch from "./components/GroupFilmSearch";
 import {Context} from './utils/AppContext';
 import ModalViewDetails from './components/ModalViewDetails';
 import ModalListViewed from './components/ModalListViewed';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   const [genreID, setGenreID] = useState(-1);
@@ -90,6 +91,7 @@ function App() {
       <ComponentIs/>
      <ModalViewDetails visible={isShowModalDetails} emitClose={handleCloseViewDetails}/>
      <ModalListViewed visible={isShowModalistViewed} emitClose={setShowModalistViewed}/>
+     <ToastContainer />
     </>
   );
 }
