@@ -1,9 +1,12 @@
+import { useState, useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-
+import {Context} from '../utils/AppContext';
 export default function FilmItem({data}) {
+  const {setIdViewDetails} = useContext(Context);
   const handleGetDetailsWithID = () => {
     console.log('handleGetDetailsWithID', data.id)
+    setIdViewDetails(data.id);
   }
   return (
     <Card className='mb-4'>

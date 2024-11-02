@@ -4,10 +4,16 @@ import App from './App.jsx'
 import './index.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import AppContext from './utils/AppContext.jsx';
 
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <App />
+    <AppContext>
+      <App/>
+    </AppContext>
+    {/* <AppContext>
+      <App/>
+    </AppContext> */}
   </StrictMode>,
 )
