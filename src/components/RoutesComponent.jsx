@@ -1,5 +1,5 @@
 import {
-    Route, Routes
+    Route, Routes, useLocation
 } from 'react-router-dom';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -7,15 +7,22 @@ import Contact from './pages/Contact';
 import Product from './pages/Product';
 import Notfound from './pages/Notfound';
 import Layout from './pages/Layout';
+import { useEffect } from 'react';
 
 export default function RoutesComponent() {
+    const location = useLocation();
+    useEffect(() => {
+        console.log('location', location);
+    }, [location])
     return (
         <Routes>
-            <Route path='/' element={<Layout />}></Route>
-            <Route index element={<Home/>} />
-            <Route path="/about" element={<About/>} />
-            <Route path="/contact" element={<Contact/>} />
-            <Route path="/product/:id" element={<Product/>} />
+            <Route path='/' element={<Layout />}>
+                <Route index element={<Home/>} />
+                <Route path="/about" element={<About/>} />
+                <Route path="/contact" element={<Contact/>} />
+                <Route path="/product/:id" element={<Product/>} />
+            </Route>
+            
             <Route path="*" element={<Notfound/>} />
         </Routes>
     )

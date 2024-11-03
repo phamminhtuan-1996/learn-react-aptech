@@ -25,7 +25,6 @@ function App() {
         <li><Link to="/product/3"> sản phẩm 3 </Link></li>
       </ul>
      <RoutesComponent/>
-     <Layout/>
     </>
   )
 }
