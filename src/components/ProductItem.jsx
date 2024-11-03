@@ -54,7 +54,7 @@ export default function ProductItem() {
   `;
   return (
     <DivParent>
-      <Link to="/">
+      <Link to="/product/1">
         <div className="product-img">
           <Image src="https://product.hstatic.net/1000197303/product/pro_da_01_2_fbab52be715148d6b4f8f88c82825e2b_grande.jpg" />
         </div>

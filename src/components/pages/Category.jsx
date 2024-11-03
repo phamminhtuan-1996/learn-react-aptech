@@ -5,20 +5,6 @@ import ProductItem from "../ProductItem";
 export default function Category() {
   const DivParent = styled.div`
         padding: 2rem;
-        .breadcrumb-item a{
-            text-decoration: none;
-            color: #2C2C2C;
-        }
-        .breadcrumb-item.active {
-            color: #777;
-        }
-        .page-link {
-            color: black;
-        }
-        .active .page-link {
-            color: white;
-            background-color: black;
-        }
   `;
   return (
     <DivParent>
