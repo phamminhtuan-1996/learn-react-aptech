@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, useId } from 'react';
 import {Button, Modal} from 'react-bootstrap';
 import {Context} from '../utils/AppContext';
 import listFilm from '../api/film';
@@ -12,7 +12,6 @@ export default function ModalViewDetails({visible=false, emitClose}) {
 
     const fetchDataDetailsByID = async () => {
         const dataFetch = await listFilm.getDetailsByID(idViewDetails);
-        console.log('dataFetch in details', dataFetch)
         setDataDetails(dataFetch);
         saveListViewed(dataFetch);
     }
