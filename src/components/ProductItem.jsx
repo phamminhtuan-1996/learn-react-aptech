@@ -102,14 +102,14 @@ export default function ProductItem() {
           className="product-color__item border"
           style={{ backgroundColor: "black" }}
         >
-          <i class="fa-solid fa-angle-right"></i>
+          <i className="fa-solid fa-angle-right"></i>
         </div>
       </div>
       <div className="product-top-bar d-flex justify-content-between">
         <div className="product-percent d-flex justify-content-center align-items-center">-30%</div>
         <div className="product-whitelist">
             <Button variant="light" className="m-2">
-                <i class="fa-regular fa-heart"></i>
+                <i className="fa-regular fa-heart"></i>
             </Button>
         </div>
       </div>

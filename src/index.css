@@ -16,3 +16,20 @@
     color: white;
     background-color: black;
 }
+
+.btn-confirm {
+    background: #D37171!important;
+    color: #fff !important;
+    text-transform: uppercase;
+    border: 1px solid #D37171 !important;
+    height: 54px;
+    border-radius: unset!important;
+}
+.btn-confirm-second {
+    background: #fff !important;
+    color: #D37171 !important;
+    border: 1px solid #D37171 !important;
+    text-transform: uppercase;
+    height: 54px;
+    border-radius: unset!important;
+}

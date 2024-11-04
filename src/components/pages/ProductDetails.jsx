@@ -1,26 +1,49 @@
-import { Container, Breadcrumb, Row, Col, Image } from "react-bootstrap";
+import { useState } from "react";
+import { Container, Breadcrumb, Row, Col, Image, ButtonGroup, Button, Accordion } from "react-bootstrap";
+import TagVariantSize from "../TagVariantSize";
+import TagVariantColor from "../TagVariantColor";
+import Quantity from '../Quantity';
+import PartProductHome from '../PartProductHome'
 import styled from "styled-components";
 export default function ProductDetails() {
+  const listSize = ['S', 'M', 'L'];
+  const listColor = [
+    {
+    title: 'Trắng',
+    img: 'https://product.hstatic.net/1000197303/product/pro_trang_1_cf82f79ade3247ea9614f98e08a714a9.jpg',
+    value: 'white'
+  },
+    {
+    title: 'Đen',
+    img: 'https://product.hstatic.net/1000197303/product/pro_den_3_b781fb7ce2d9494098fbdc002c6ea2a4.jpg',
+    value: 'black'
+  }
+    ]
+  const [valSize, setValSize] = useState('S');
+  const [valColor, setValColor] = useState('white');
+  const [valQuantity, setValQuantity] = useState(1);
   const DivParent = styled.div`
         padding-top: 2rem;
-        .list-color__item {
-            width: 90px;
-            height: 104px;
-            margin-right: 1rem;
+        .accordion-item {
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            &:nth-child(2) {
+                border: none;
+            }
+            .accordion-button {
+                background-color: white;
+                box-shadow:none;
+            }
         }
-        .list-color__item.active {
-            width: 89px;
-            border: 1px solid #D37171;
+        .des-product {
+            font-size: 14px;
         }
-        .list-color__item--title {
-            // height: 88px;
-            background-color: rgba(12, 5, 5, 0.6);
-            display: flex;
-            justify-content: center;
-            bottom: 0;
-            font-size: 11px;
+        .product-home-title {
+            text-align: center;
+            margin: 1rem 0;
         }
-    `;
+    `
   return (
     <DivParent>
       <Container>
@@ -55,24 +78,63 @@ export default function ProductDetails() {
                 <br/>
                 <span className="my-2 d-block">Chọn màu</span>
                 <div className="list-color d-flex">
-                    <div className="list-color__item active position-relative">
-                        <Image className="w-100 h-100" src="https://product.hstatic.net/1000197303/product/pro_trang_1_cf82f79ade3247ea9614f98e08a714a9.jpg"/>
-                        <div className="list-color__item--title w-100 position-absolute">
-                            <span className="text-white">Trắng</span>
-                        </div>
-                    </div>
-                    <div className="list-color__item position-relative">
-                        <Image className="w-100 h-100" src="https://product.hstatic.net/1000197303/product/pro_den_3_b781fb7ce2d9494098fbdc002c6ea2a4.jpg"/>
-                        <div className="list-color__item--title w-100 position-absolute">
-                            <span className="text-white">Đen</span>
-                        </div>
-                    </div>
-                    <div className="list-size">
-                        
-                    </div>
+                    {listColor.map((item, index) => (
+                         <TagVariantColor
+                            key={index}
+                            title={item.title}
+                            value={item.value}
+                            img={item.img}
+                            active={valColor === item.value}
+                            emitSelected={setValColor}
+                        />
+                    ))}
                 </div>
+                <div className="list-size mt-4">
+                    {listSize.map((item, index) => (
+                        <TagVariantSize
+                            key={index}
+                            title={item}
+                            value={item}
+                            active={valSize === item}
+                            className="me-2"
+                            emitSelect={setValSize}
+                        />
+                    ))}
+                    
+                </div>
+                <div className="d-flex mt-4">
+                    <span className="me-2">Số lượng: </span>
+                    <Quantity value={valQuantity} min="1" onChangeEvent={setValQuantity} />
+                </div>
+               <ButtonGroup className="w-100 mt-4">
+                <Button className="btn-confirm-second w-50">Thêm vào giỏ hàng</Button>
+                <Button className="btn-confirm w-50">Mua ngay</Button>
+               </ButtonGroup>
+               <Accordion defaultActiveKey={[]}  alwaysOpen className="mt-4">
+                <Accordion.Item eventKey="0">
+                    <Accordion.Header>Chi tiết sản phẩm</Accordion.Header>
+                    <Accordion.Body>
+                        <p className="des-product">
+                            - Đầm midi thun sát nách form ôm in hình. <br/>
+                            - Chất liệu thun sọc mềm, mịn, độ đàn hồi cao thoáng mát và thoải mái. <br/>
+                            - Phù hợp mặc đi chơi, dạo phố, cà phê cuối tuần cùng bạn bè. <br/>
+                        </p>
+                    </Accordion.Body>
+                </Accordion.Item>
+                <Accordion.Item eventKey="1">
+                    <Accordion.Header>Hướng dẫn bảo quản</Accordion.Header>
+                    <Accordion.Body>
+                        <p className="des-product">
+                    - Giặt tay để tránh bay màu hoặc xù lông, ủi nhiệt độ bình thường. <br/>
+                    - Không vắt hoặc xoắn mạnh vì điều này có thể gây ra các nếp nhăn và ảnh hưởng đến độ bền, cấu trúc của vải. <br/>
+                    - Phơi, ủi mặt trái sản phẩm. <br/>
+                    </p>
+                    </Accordion.Body>
+                </Accordion.Item>
+                </Accordion>
             </Col>
         </Row>
+        <PartProductHome title="Thường được mua cùng" />
       </Container>
     </DivParent>
   );

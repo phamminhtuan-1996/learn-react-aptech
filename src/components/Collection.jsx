@@ -28,25 +28,25 @@ export default function Collection() {
         <Col md={3} className="position-relative">
           <Image className="w-100" src="https://theme.hstatic.net/1000197303/1001046599/14/marconme-image-1.jpg?v=9978" />
           <Button className="position-absolute" variant="light">
-            <i class="fa-solid fa-plus"></i>
+            <i className="fa-solid fa-plus"></i>
           </Button>
         </Col>
         <Col md={3} className="position-relative">
           <Image className="w-100" src="https://theme.hstatic.net/1000197303/1001046599/14/marconme-image-2.jpg?v=9978" />
           <Button className="position-absolute" variant="light">
-            <i class="fa-solid fa-plus"></i>
+            <i className="fa-solid fa-plus"></i>
           </Button>
         </Col>
         <Col md={3} className="position-relative">
           <Image className="w-100" src="https://theme.hstatic.net/1000197303/1001046599/14/marconme-image-3.jpg?v=9978" />
           <Button className="position-absolute" variant="light">
-            <i class="fa-solid fa-plus"></i>
+            <i className="fa-solid fa-plus"></i>
           </Button>
         </Col>
         <Col md={3} className="position-relative">
           <Image className="w-100" src="https://theme.hstatic.net/1000197303/1001046599/14/marconme-image-5.jpg?v=9978" />
           <Button className="position-absolute" variant="light">
-            <i class="fa-solid fa-plus"></i>
+            <i className="fa-solid fa-plus"></i>
           </Button>
         </Col>
       </Row>

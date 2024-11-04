@@ -49,13 +49,13 @@ export default function Footer() {
               />
               <ul className="d-flex align-items-center">
                 <li>
-                  <i class="fa-brands fa-facebook"></i>
+                  <i className="fa-brands fa-facebook"></i>
                 </li>
                 <li>
-                  <i class="fa-brands fa-instagram"></i>
+                  <i className="fa-brands fa-instagram"></i>
                 </li>
                 <li>
-                  <i class="fa-brands fa-tiktok"></i>
+                  <i className="fa-brands fa-tiktok"></i>
                 </li>
                 <li>
                   <ZaloLogo />
@@ -76,7 +76,7 @@ export default function Footer() {
             <Row>
               <Col md={4}>
                 <h3>Về chúng tôi</h3>
-                <ul class="footer-list">
+                <ul className="footer-list">
                   <li>Giới thiệu MARC</li>
                   <li>Tuyển dụng</li>
                   <li>Cảm hứng thời trang</li>
@@ -89,7 +89,7 @@ export default function Footer() {
               </Col>
               <Col md={4}>
                 <h3>Hỗ trợ khách hàng</h3>
-                <ul class="footer-list">
+                <ul className="footer-list">
                   <li>Liên hệ đến MARC</li>
                   <li>Câu hỏi thường gặp</li>
                   <li>Hướng dẫn tạo tài khoản</li>
@@ -103,13 +103,13 @@ export default function Footer() {
               </Col>
               <Col md={4}>
                 <h3>Liên lạc</h3>
-                <div class="footer-phone">
-                    <p class="footer-phone-title m-0">Đặt hàng trực tuyến (8h-21h)</p>
-                    <a class="footer-phone-number text-decoration-none" href="tel:1900 636942">
+                <div className="footer-phone">
+                    <p className="footer-phone-title m-0">Đặt hàng trực tuyến (8h-21h)</p>
+                    <a className="footer-phone-number text-decoration-none" href="tel:1900 636942">
                         <span>1900 636942</span>
                     </a>
-                    <p class="footer-phone-title m-0">Chăm sóc khách hàng</p>
-                    <a class="footer-phone-number text-decoration-none" href="tel:1900 636940">
+                    <p className="footer-phone-title m-0">Chăm sóc khách hàng</p>
+                    <a className="footer-phone-number text-decoration-none" href="tel:1900 636940">
                         <span>1900 636940</span>
                     </a>
                 </div>

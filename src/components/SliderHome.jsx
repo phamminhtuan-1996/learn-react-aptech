@@ -27,7 +27,7 @@ export default function SliderHome() {
   `;
   return (
     <DivParent>
-      <Carousel prevIcon={<i class="fa-solid fa-arrow-left"></i>} nextIcon={<i class="fa-solid fa-arrow-right"></i>}>
+      <Carousel prevIcon={<i className="fa-solid fa-arrow-left"></i>} nextIcon={<i className="fa-solid fa-arrow-right"></i>}>
         <Carousel.Item>
           <Image src="https://theme.hstatic.net/1000197303/1001046599/14/slideshow_1.jpg?v=9978" />
         </Carousel.Item>
