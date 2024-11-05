@@ -5,9 +5,7 @@ import TagVariantColor from "../TagVariantColor";
 import Quantity from '../Quantity';
 import PartProductHome from '../PartProductHome';
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
 export default function ProductDetails() {
-  const navigate = useNavigate();
   const listSize = ['S', 'M', 'L'];
   const listColor = [
     {
