@@ -10,6 +10,7 @@ import {
 } from "react-bootstrap";
 import styled from "styled-components";
 import SelectForm from "../../components/SelectForm";
+import ProductItemCheckout from "../ProductItemCheckout";
 
 export default function Checkout() {
   const DivParent = styled.div`
@@ -61,18 +62,32 @@ export default function Checkout() {
     .accordion-body {
       background-color: #fafafa;
     }
-      .form-check-input {
+    .form-check-input {
         border-color: black;
-      }
-      .form-check-label {
+    }
+    .form-check-label {
         color: black!important;
-      }
+    }
+    .btn-use-voucher {
+        background-color: #c8c8c8;
+        border-color: #c8c8c8;
+        transition: 1s;
+        &:hover {
+            background-color: black;
+        }
+    }
+    .label-bill {
+        font-size: 14px;
+    }
+    .title-program {
+        font-size: 18px;
+    }
   `;
   return (
     <DivParent className="position-relative">
       <Container>
         <Row>
-          <Col md="6">
+          <Col md="6" className="px-4">
             <Image
               className="logo"
               src="https://file.hstatic.net/1000197303/file/logo_0caef1aea53f4b6281978ef2546b486b.png"
@@ -165,6 +180,54 @@ export default function Checkout() {
             <div className="d-flex justify-content-end mt-4">
             <Button className="btn-confirm w-50">Thanh Toán</Button>
             </div>
+          </Col>
+          <Col md={6} className="px-4">
+           <ProductItemCheckout/>
+           <ProductItemCheckout/>
+           <ProductItemCheckout/>
+           <hr />
+           <Row>
+            <Col md={9}>
+                <Form.Control placeholder="Mã giảm giá" />
+            </Col>
+            <Col md={3} className="d-flex align-items-center justify-content-center">
+                <Button className="btn-use-voucher" variant="dark" size="lg">Sử dụng</Button>
+            </Col>
+           </Row>
+           <hr />
+           <Row>
+            <Col md={9} className="d-flex align-items-center">
+                <span className="title-program">Chương trình khách hàng thân thiết</span>
+            </Col>
+            <Col md={3} className="d-flex align-items-center justify-content-center">
+                <Button variant="dark" size="lg">Sử dụng</Button>
+            </Col>
+           </Row>
+           <hr />
+           <Row>
+            <Col md={6}>
+                <span className="label-bill fw-light">Tạm tính</span>
+            </Col>
+            <Col md={6} className="d-flex justify-content-end">
+                <span className="value-bill ">2,070,000₫</span>
+            </Col>
+            <Col md={6}>
+                <span className="label-bill fw-light">Phí vận chuyển</span>
+            </Col>
+            <Col md={6} className="d-flex justify-content-end">
+                <span className="value-bill fw-light">__</span>
+            </Col>
+           </Row>
+           <hr />
+            <Row>
+                <Col md={6}>
+                    <span>Tổng cộng</span>
+                </Col>
+                <Col md={6} className="d-flex justify-content-end align-items-center">
+                    <small className="fw-light d-block  me-1">VND</small>
+                    <strong>2,070,000₫</strong>
+                </Col>
+            </Row>
           </Col>
         </Row>
       </Container>
