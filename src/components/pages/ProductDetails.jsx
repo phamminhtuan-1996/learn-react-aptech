@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Container, Breadcrumb, Row, Col, Image, ButtonGroup, Button, Accordion } from "react-bootstrap";
 import TagVariantSize from "../TagVariantSize";
 import TagVariantColor from "../TagVariantColor";
 import Quantity from '../Quantity';
-import PartProductHome from '../PartProductHome'
+import PartProductHome from '../PartProductHome';
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 export default function ProductDetails() {
+  const navigate = useNavigate();
   const listSize = ['S', 'M', 'L'];
   const listColor = [
     {
@@ -22,6 +24,13 @@ export default function ProductDetails() {
   const [valSize, setValSize] = useState('S');
   const [valColor, setValColor] = useState('white');
   const [valQuantity, setValQuantity] = useState(1);
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+  useEffect(() => {
+    topFunction();
+  }, [])
   const DivParent = styled.div`
         padding-top: 2rem;
         .accordion-item {

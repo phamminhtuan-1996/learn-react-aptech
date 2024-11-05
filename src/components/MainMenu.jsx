@@ -1,3 +1,4 @@
+import {useState, useEffect} from 'react';
 import { Container, Nav, Navbar, Image } from "react-bootstrap";
 import {Link} from 'react-router-dom';
 import Logo from '../img/logo.png'
@@ -5,7 +6,9 @@ import styled from 'styled-components';
 
 
 export default function MainMenu() {
+  const [isFixed, setFixed] = useState(false);
   const StyledNavbar = styled.div`
+  height: 57px;
   .nav-link {
     text-transform: uppercase;
     font-size: 15px;
@@ -36,9 +39,19 @@ export default function MainMenu() {
     font-size: 12px;
   }
 `;
+useEffect(() => {
+  document.addEventListener('scroll', function(e) {
+    const position = window.scrollY;
+    if (position > 57) {
+      setFixed(true);
+    } else {
+      setFixed(false);
+    }
+  })
+}, [])
   return (
     <StyledNavbar>
-      <Navbar expand="lg" bg="light">
+      <Navbar expand="lg" bg="light" className={`${isFixed ? "fixed-top" : ""}`}>
         <Container>
           <Navbar.Brand href="/">
             <Image src={Logo}/>
