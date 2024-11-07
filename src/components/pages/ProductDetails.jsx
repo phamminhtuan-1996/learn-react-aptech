@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import {
   Container,
   Breadcrumb,
@@ -9,6 +9,7 @@ import {
   Button,
   Accordion,
 } from "react-bootstrap";
+import {Context} from '../../utils/AppContext';
 import { useParams } from "react-router-dom";
 import { getImgStrapi, formatNumberThoundSand } from "../../utils/helper";
 import product from "../../api/product";
@@ -48,6 +49,7 @@ padding-top: 2rem;
 export default function ProductDetails() {
 
   const param = useParams();
+  const {setShowNotication, setMessageNoti} = useContext(Context)
   const listSize = ["S", "M", "L"];
   const [valSize, setValSize] = useState("S");
   const [valColor, setValColor] = useState("white");
@@ -146,6 +148,8 @@ export default function ProductDetails() {
     if (indexHavedResult > -1) {
       result[indexHavedResult].quantity = result[indexHavedResult].quantity + Number(valQuantity);
       localStorage.setItem('list-cart', JSON.stringify(result));
+      setMessageNoti('Thêm giỏ hàng thành công');
+      setShowNotication(true)
       return;
     }
     const data = {
@@ -154,11 +158,14 @@ export default function ProductDetails() {
       quantity: Number(valQuantity),
       name_variant: listColor.find((item) => item.id === valColor).color_name,
       id_variant: valColor,
-      thumbnail: getImgStrapi(listColor.find((item) => item.id === valColor).thumbnail)
+      thumbnail: getImgStrapi(listColor.find((item) => item.id === valColor).thumbnail),
+      size: valSize,
+      price: dataProduct.price
     }
     result = [data, ...result];
     localStorage.setItem('list-cart', JSON.stringify(result));
-    console.log('handleAddtoCart', data, 'result', result);
+    setMessageNoti('Thêm giỏ hàng thành công');
+    setShowNotication(true)
   }
   useEffect(() => {
     if (listColor.length === 0) {

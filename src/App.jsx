@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import './App.css'
-import RoutesComponent from './components/RoutesComponent'
+import RoutesComponent from './components/RoutesComponent';
+import ToastNoftication from './components/ToastNoftication';
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
       <RoutesComponent/>
+      <ToastNoftication/>
     </>
   )
 }

@@ -99,7 +99,9 @@ useEffect(() => {
             <i className="fa-regular fa-user"></i>
             </div>
             <div className="navbar-search">
+              <Link to="/search">
               <i className="fa-solid fa-magnifying-glass"></i>
+              </Link>
             </div>
           </div>
         </Container>

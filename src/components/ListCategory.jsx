@@ -7,9 +7,18 @@ import product from '../api/product';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 const DivParent = styled.div`
-        
+.active {
+    img {
+        border: 1px solid #D37171;
+    }
+    h4 {
+        color: #D37171;
+    }
+}
 img {
     width: 150px;
+    border-radius: 50%;
+    
 }
 h4 {
     font-weight: 300;
@@ -35,6 +44,7 @@ export default function ListCategory() {
       }
     
     useEffect(() => {
+        console.log(param);
         fetchListCate();
     }, [])
     useEffect(() => {
@@ -45,10 +55,10 @@ export default function ListCategory() {
         <DivParent>
             <Row>
                 {listCate.map((item, index) => (
-                    <Col key={index}>
+                    <Col key={index} className={`${param?.category_id && param.category_id === String(item.id) ? 'active' : ''}`}>
                         <Link to={`/category/${item.id}`} className="d-flex flex-column align-items-center"> 
                             <Image src={urlIMG + item.thumbnail.url}/>
-                            <h4 className='text-center mt-2'>{item.name}</h4>
+                            <h4 className="text-center mt-2">{item.name}</h4>
                         </Link>
                     </Col>
                 ))}

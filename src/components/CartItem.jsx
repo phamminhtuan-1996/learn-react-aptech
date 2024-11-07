@@ -1,4 +1,7 @@
+import { useState } from 'react';
+import {formatNumberThoundSand} from '../utils/helper';
 import {Image, Button} from 'react-bootstrap';
+import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import TagVariantSize from './TagVariantSize';
 import Quantity from '../components/Quantity';
@@ -17,26 +20,36 @@ const DivParent = styled.div`
     }
 }
 `
-export default function CartItem() {
-
+export default function CartItem({data={}, remoItem}) {
+    const [ValQUantity, setQuantity] = useState(data.quantity);
+    const handleSetQuantity = (val) => {
+        setQuantity(val);
+        const getListItemLocal = JSON.parse(localStorage.getItem('list-cart'));
+        let result = getListItemLocal;
+        const index = getListItemLocal.findIndex((item) => item.idProduct === data.idProduct);
+        result[index].quantity = Number(val);
+        localStorage.setItem('list-cart', JSON.stringify(result));
+    }
     return ( 
         <DivParent className='d-flex align-items-center mb-4'>
            <div className='w-75 d-flex'>
             <div className="w-25">
-            <Image className='w-100' src="https://product.hstatic.net/1000197303/product/pro_hoa_01_1_411026ae0e70472288c8649bb5f9f675_medium.jpg"/>
+            <Link to={`/product/${data.idProduct}`}>
+                <Image className='w-100' src={data.thumbnail}/>
+            </Link>
             </div>
             <div className="w-75 ps-4 d-flex flex-column justify-content-center">
-                <h4 className='fw-light cart-title'>Áo thun tay dài họa tiết cổ thuyền phối bèo đính nơ</h4>
+                <h4 className='fw-light cart-title'>{data.product_name}</h4>
                 <div className="list-variant my-2">
-                    <TagVariantSize title="Hoa 01" />
-                    <TagVariantSize title="M" />
+                    <TagVariantSize title={data.name_variant} />
+                    <TagVariantSize title={data.size} />
                 </div>
-                <span>295,000₫</span>
+                <span>{formatNumberThoundSand(data.price * ValQUantity)}₫</span>
             </div>
            </div>
            <div className='w-25 d-flex justify-content-between'>
-                <Quantity/>
-                <Button variant='light'><i class="fa-solid fa-trash"></i></Button>
+                <Quantity value={ValQUantity} onChangeEvent={handleSetQuantity}/>
+                <Button variant='light' onClick={() => remoItem(data.idProduct)}><i class="fa-solid fa-trash"></i></Button>
            </div>
         </DivParent>
     )
