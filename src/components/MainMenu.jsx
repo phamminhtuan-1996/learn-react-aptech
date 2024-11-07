@@ -45,17 +45,30 @@ height: 57px;
 export default function MainMenu() {
   const [isFixed, setFixed] = useState(false);
   const [listCate, setListCate] = useState([]);
+  const [totalCart, setTotalCart] = useState(0);
   
   const fetchListCate = async () => {
     const body = {
       sort: 'createdAt:asc',
-      filters: {},
     };
     const res = await product.listCate(body)
     console.log('fetchListCate', res.data);
     setListCate(res.data);
   }
+  const getTotalCart = () => {
+    const getTotalCart = localStorage.getItem('list-cart');
+    if (!getTotalCart) {
+      return;
+    }
+    const totalNumber = JSON.parse(getTotalCart);
+    let total = 0;
+    totalNumber.forEach((item) => {
+      total += item.quantity;
+    })
+    setTotalCart(total);
+  }
   useEffect(() => {
+    getTotalCart();
     fetchListCate();
   }, [])
 
@@ -77,11 +90,10 @@ useEffect(() => {
             <Image src={Logo}/>
           </Navbar.Brand>
           <Nav>
-              <Nav.Link> <Link to='/'>Home</Link> </Nav.Link>
+               <Link className='nav-link' to='/'>Home</Link> 
               {listCate.map((item, key) => (
-                <Nav.Link key={key}> <Link to={`/category/${item.id}`}>{item.name}</Link></Nav.Link>
+                <Link className='nav-link' key={key} to={`/category/${item.id}`}>{item.name}</Link>
               ))}
-
           </Nav>
           <div className="list-button-navbar d-flex">
             <div className="navbar-heart me-2">
@@ -92,7 +104,7 @@ useEffect(() => {
               <i className="fa-solid fa-cart-shopping"></i>
               </Link>
               <div className="total-cart position-absolute d-flex justify-content-center align-items-center rounded-circle">
-                4
+                {totalCart}
               </div>
             </div>
             <div className="navbar-user me-2">

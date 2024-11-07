@@ -76,8 +76,8 @@ export default function Category() {
         <Row>
             
                 {listProduct.map((item, key) => (
-                    <Col md={3}>
-                        <ProductItem data={item} key={key}/>
+                    <Col md={3} key={key}>
+                        <ProductItem data={item} />
                     </Col>
                 ))}
            

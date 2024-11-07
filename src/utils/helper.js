@@ -52,79 +52,15 @@ export function queryStringStrapi(obj) {
     const result = value.toLocaleString(undefined, { maximumFractionDigits: 4 });
     return String(result);
   }
-//   {
-//     "id": 16,
-//     "documentId": "l6u6j9yauem4ucx409gf3olj",
-//     "name": "pro_den_4_0199316ffea6493a93e0a2f2a9bba063_master.jpg",
-//     "alternativeText": null,
-//     "caption": null,
-//     "width": 1500,
-//     "height": 2000,
-//     "formats": {
-//         "thumbnail": {
-//             "name": "thumbnail_pro_den_4_0199316ffea6493a93e0a2f2a9bba063_master.jpg",
-//             "hash": "thumbnail_pro_den_4_0199316ffea6493a93e0a2f2a9bba063_master_4e53f3025d",
-//             "ext": ".jpg",
-//             "mime": "image/jpeg",
-//             "path": null,
-//             "width": 117,
-//             "height": 156,
-//             "size": 2.18,
-//             "sizeInBytes": 2182,
-//             "url": "/uploads/thumbnail_pro_den_4_0199316ffea6493a93e0a2f2a9bba063_master_4e53f3025d.jpg"
-//         },
-//         "large": {
-//             "name": "large_pro_den_4_0199316ffea6493a93e0a2f2a9bba063_master.jpg",
-//             "hash": "large_pro_den_4_0199316ffea6493a93e0a2f2a9bba063_master_4e53f3025d",
-//             "ext": ".jpg",
-//             "mime": "image/jpeg",
-//             "path": null,
-//             "width": 750,
-//             "height": 1000,
-//             "size": 29.61,
-//             "sizeInBytes": 29611,
-//             "url": "/uploads/large_pro_den_4_0199316ffea6493a93e0a2f2a9bba063_master_4e53f3025d.jpg"
-//         },
-//         "medium": {
-//             "name": "medium_pro_den_4_0199316ffea6493a93e0a2f2a9bba063_master.jpg",
-//             "hash": "medium_pro_den_4_0199316ffea6493a93e0a2f2a9bba063_master_4e53f3025d",
-//             "ext": ".jpg",
-//             "mime": "image/jpeg",
-//             "path": null,
-//             "width": 563,
-//             "height": 750,
-//             "size": 18.76,
-//             "sizeInBytes": 18756,
-//             "url": "/uploads/medium_pro_den_4_0199316ffea6493a93e0a2f2a9bba063_master_4e53f3025d.jpg"
-//         },
-//         "small": {
-//             "name": "small_pro_den_4_0199316ffea6493a93e0a2f2a9bba063_master.jpg",
-//             "hash": "small_pro_den_4_0199316ffea6493a93e0a2f2a9bba063_master_4e53f3025d",
-//             "ext": ".jpg",
-//             "mime": "image/jpeg",
-//             "path": null,
-//             "width": 375,
-//             "height": 500,
-//             "size": 10.2,
-//             "sizeInBytes": 10195,
-//             "url": "/uploads/small_pro_den_4_0199316ffea6493a93e0a2f2a9bba063_master_4e53f3025d.jpg"
-//         }
-//     },
-//     "hash": "pro_den_4_0199316ffea6493a93e0a2f2a9bba063_master_4e53f3025d",
-//     "ext": ".jpg",
-//     "mime": "image/jpeg",
-//     "size": 94.51,
-//     "url": "/uploads/pro_den_4_0199316ffea6493a93e0a2f2a9bba063_master_4e53f3025d.jpg",
-//     "previewUrl": null,
-//     "provider": "local",
-//     "provider_metadata": null,
-//     "createdAt": "2024-11-05T13:31:26.706Z",
-//     "updatedAt": "2024-11-05T13:31:26.706Z",
-//     "publishedAt": "2024-11-05T13:31:26.706Z"
-// }
+
   export function getImgStrapi(obj, type = null) {
     if (type) {
       return urlIMG + obj.formats[type].url;
     }
     return urlIMG + obj.url;
+  }
+
+  export function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
   }

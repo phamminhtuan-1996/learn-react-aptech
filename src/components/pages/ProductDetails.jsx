@@ -11,7 +11,8 @@ import {
 } from "react-bootstrap";
 import {Context} from '../../utils/AppContext';
 import { useParams } from "react-router-dom";
-import { getImgStrapi, formatNumberThoundSand } from "../../utils/helper";
+import { useNavigate } from 'react-router-dom';
+import { getImgStrapi, formatNumberThoundSand, topFunction } from "../../utils/helper";
 import product from "../../api/product";
 import TagVariantSize from "../TagVariantSize";
 import TagVariantColor from "../TagVariantColor";
@@ -47,8 +48,8 @@ padding-top: 2rem;
 }
 `;
 export default function ProductDetails() {
-
   const param = useParams();
+  const navigate = useNavigate();
   const {setShowNotication, setMessageNoti} = useContext(Context)
   const listSize = ["S", "M", "L"];
   const [valSize, setValSize] = useState("S");
@@ -61,10 +62,7 @@ export default function ProductDetails() {
   const [imgTarget, setImgTarget] = useState(
     "https://product.hstatic.net/1000197303/product/pro_trang_1_cf82f79ade3247ea9614f98e08a714a9_master.jpg"
   );
-  function topFunction() {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-  }
+
   const fetchProductGeneral = async () => {
     const body = {
       sort: "createdAt:desc",
@@ -167,6 +165,10 @@ export default function ProductDetails() {
     setMessageNoti('Thêm giỏ hàng thành công');
     setShowNotication(true)
   }
+  const handleGoCheckout = () => {
+    handleAddtoCart();
+    navigate('/checkout');
+  }
   useEffect(() => {
     if (listColor.length === 0) {
       return;
@@ -208,9 +210,6 @@ export default function ProductDetails() {
                     onClick={() => setImgTarget(getImgStrapi(item, "large"))}
                   />
                 ))}
-                {/* <Image className="mb-4" src="https://product.hstatic.net/1000197303/product/pro_trang_2_5cb36773438a450884f9b2b05293c693_compact.jpg"/>
-                        <Image className="mb-4" src="https://product.hstatic.net/1000197303/product/pro_trang_3_11caaa799ce540e99e53219d1e6dbdb5_compact.jpg"/>
-                        <Image src="https://product.hstatic.net/1000197303/product/pro_trang_4_127705d5e5de42c881051b3026de3faf_compact.jpg"/> */}
               </Col>
               <Col md={9}>
                 <Image className="w-100" src={imgTarget} />
@@ -270,7 +269,7 @@ export default function ProductDetails() {
               >
                 Thêm vào giỏ hàng
               </Button>
-              <Button disabled={listColor.length === 0} className="btn-confirm w-50">Mua ngay</Button>
+              <Button disabled={listColor.length === 0}  className="btn-confirm w-50" onClick={handleGoCheckout}>Mua ngay</Button>
             </ButtonGroup>
             <Accordion defaultActiveKey={[]} alwaysOpen className="mt-4">
               <Accordion.Item eventKey="0">

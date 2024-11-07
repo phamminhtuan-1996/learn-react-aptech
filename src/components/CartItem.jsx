@@ -49,7 +49,7 @@ export default function CartItem({data={}, remoItem}) {
            </div>
            <div className='w-25 d-flex justify-content-between'>
                 <Quantity value={ValQUantity} onChangeEvent={handleSetQuantity}/>
-                <Button variant='light' onClick={() => remoItem(data.idProduct)}><i class="fa-solid fa-trash"></i></Button>
+                <Button variant='light' onClick={() => remoItem(data.idProduct)}><i className="fa-solid fa-trash"></i></Button>
            </div>
         </DivParent>
     )
