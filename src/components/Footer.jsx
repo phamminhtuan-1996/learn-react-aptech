@@ -2,38 +2,39 @@ import styled from "styled-components";
 import { Col, Row, Image, Container } from "react-bootstrap";
 import Logo from "../img/logo.png";
 import ZaloLogo from "../svg/ZaloLogo";
+const DivParent = styled.footer`
+.footer-logo {
+  height: 33px;
+}
+.footer-logo-bct {
+  height: 44px;
+}
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+li {
+  margin-right: 1rem;
+}
+p,
+.footer-policy {
+  font-size: 12px;
+}
+.footer-policy {
+  font-style: italic;
+}
+.footer-list li {
+  font-size: 15px;
+  margin-bottom: 11px;
+}
+h3 {
+    font-size: 22px;
+    font-weight: 400;
+}
+`;
 export default function Footer() {
-  const DivParent = styled.footer`
-    .footer-logo {
-      height: 33px;
-    }
-    .footer-logo-bct {
-      height: 44px;
-    }
-    ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-    li {
-      margin-right: 1rem;
-    }
-    p,
-    .footer-policy {
-      font-size: 12px;
-    }
-    .footer-policy {
-      font-style: italic;
-    }
-    .footer-list li {
-      font-size: 15px;
-      margin-bottom: 11px;
-    }
-    h3 {
-        font-size: 22px;
-        font-weight: 400;
-    }
-  `;
+
   return (
     <Container className="my-4">
       <DivParent>

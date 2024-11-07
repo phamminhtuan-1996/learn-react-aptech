@@ -1,37 +1,38 @@
 import { Form, InputGroup, Image } from 'react-bootstrap';
 import styled from 'styled-components';
+const DivParent = styled.div`
+background-color: #2C2C2C;
+height: 260px;
+margin-top: 1rem;
+color: white;
+display: flex;
+align-items: center;
+flex-direction: column;
+justify-content: center;
+h1 {
+    font-size: 32px;
+}
+p {
+    font-size: 12px;
+}
+.form-control {
+    border: none;
+}
+.input-group {
+    width: 520px;
+    height: 50px;
+}
+.input-group-text img{
+    width: 24px;
+    height: 24px;
+}
+.input-group-text {
+    background-color: #fff;
+    border: none
+}
+`
 export default function SendEmail() {
-    const DivParent = styled.div`
-        background-color: #2C2C2C;
-        height: 260px;
-        margin-top: 1rem;
-        color: white;
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        justify-content: center;
-        h1 {
-            font-size: 32px;
-        }
-        p {
-            font-size: 12px;
-        }
-        .form-control {
-            border: none;
-        }
-        .input-group {
-            width: 520px;
-            height: 50px;
-        }
-        .input-group-text img{
-            width: 24px;
-            height: 24px;
-        }
-        .input-group-text {
-            background-color: #fff;
-            border: none
-        }
-    `
+
 
     return (
         <DivParent>

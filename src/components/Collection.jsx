@@ -1,22 +1,23 @@
 import { Row, Col, Image, Button } from "react-bootstrap";
 import styled from "styled-components";
+const DivParent = styled.div`
+margin-top: 1rem;
+img {
+    height: 250px;
+    object-fit: contain;
+}
+button {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%);
+  border-radius: 50%;
+}
+i {
+    color: #D37171;
+}
+`;
+
 export default function Collection() {
-  const DivParent = styled.div`
-    margin-top: 1rem;
-    img {
-        height: 250px;
-        object-fit: contain;
-    }
-    button {
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%);
-      border-radius: 50%;
-    }
-    i {
-        color: #D37171;
-    }
-  `;
 
   return (
     <DivParent>

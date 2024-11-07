@@ -1,31 +1,55 @@
+
+import { useEffect, useState } from 'react';
 import {Row, Col, Image} from 'react-bootstrap';
+import { useParams } from "react-router-dom";
+import { urlIMG } from '../api/constant';
+import product from '../api/product';
 import styled from 'styled-components';
-export default function ListCategory() {
-    const listCate = [
-        {img: 'https://theme.hstatic.net/1000197303/1001046599/14/category1-img.png?v=9978', name: "SIGNATURE", id: -1 },
-        {img: 'https://theme.hstatic.net/1000197303/1001046599/14/category2-img.png?v=9978', name: "Back in stock", id: -1 },
-        {img: 'https://theme.hstatic.net/1000197303/1001046599/14/category3-img.png?v=9978', name: "Áo kiểu", id: -1 },
-        {img: 'https://theme.hstatic.net/1000197303/1001046599/14/category4-img.png?v=9978', name: "Áo thun", id: -1 },
-        {img: 'https://theme.hstatic.net/1000197303/1001046599/14/category5-img.png?v=9978', name: "Đầm", id: -1 },
-        {img: 'https://theme.hstatic.net/1000197303/1001046599/14/category6-img.png?v=9978', name: "Quần", id: -1 },
-        {img: 'https://theme.hstatic.net/1000197303/1001046599/14/category7-img.png?v=9978', name: "Váy", id: -1 },
-    ]
-    const DivParent = styled.div`
+import {Link} from 'react-router-dom';
+const DivParent = styled.div`
         
-        img {
-            width: 150px;
-        }
-        h4 {
-            font-weight: 300;
-        }
-    `
+img {
+    width: 150px;
+}
+h4 {
+    font-weight: 300;
+}
+a {
+    text-decoration: none;
+    color: black;
+}
+`
+export default function ListCategory() {
+
+    const param = useParams();
+    const [listCate, setListCate] = useState([]);
+    const fetchListCate = async () => {
+        const body = {
+          sort: 'createdAt:asc',
+          filters: {},
+          populate: '*'
+        };
+        const res = await product.listCate(body)
+        console.log('fetchListCate', res.data);
+        setListCate(res.data);
+      }
+    
+    useEffect(() => {
+        fetchListCate();
+    }, [])
+    useEffect(() => {
+        fetchListCate();
+    }, [param])
+
     return (
         <DivParent>
             <Row>
                 {listCate.map((item, index) => (
                     <Col key={index}>
-                        <Image src={item.img}/>
-                        <h4 className='text-center mt-2'>{item.name}</h4>
+                        <Link to={`/category/${item.id}`} className="d-flex flex-column align-items-center"> 
+                            <Image src={urlIMG + item.thumbnail.url}/>
+                            <h4 className='text-center mt-2'>{item.name}</h4>
+                        </Link>
                     </Col>
                 ))}
             </Row>

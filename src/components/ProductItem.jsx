@@ -1,70 +1,77 @@
+import {urlIMG} from '../api/constant'
+import {formatNumberThoundSand} from '../utils/helper';
 import { Image, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-export default function ProductItem() {
-  const DivParent = styled.div`
-    position: relative;
-    margin-bottom: 1rem;
-    .product-top-bar {
-        width: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-    }
-    .product-img img {
-      height: 420px;
-    }
-    a {
-      font-size: 20px;
-      text-decoration: none;
-      color: black;
-    }
-    .product-color__item {
-      width: 22px;
-      height: 22px;
-      // border: 1px solid #E2E2E2;
-      border-radius: 100%;
-      margin-right: 5px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .product-color__item--child {
-      width: 15px;
-      height: 15px;
-      border-radius: 50%;
-    }
-    .fa-solid {
-      color: #ffff;
-      font-size: 12px;
-    }
-    .product-percent {
-        width: 50px;
-        height: 50px;
-        background-image: url('https://theme.hstatic.net/1000197303/1001046599/14/tag-sale.png?v=9976');
-        background-size: cover;
-        color: white;
-    }
-    .product-whitelist i {
-        color: #D37171;
-    }
-    .product-whitelist button {
-        border-radius: 50%;
-    }
-  `;
+const DivParent = styled.div`
+position: relative;
+margin-bottom: 1rem;
+.product-top-bar {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.product-img img {
+  height: 420px;
+}
+a {
+  font-size: 20px;
+  text-decoration: none;
+  color: black;
+}
+.product-color__item {
+  width: 22px;
+  height: 22px;
+  // border: 1px solid #E2E2E2;
+  border-radius: 100%;
+  margin-right: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.product-color__item--child {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+}
+.fa-solid {
+  color: #ffff;
+  font-size: 12px;
+}
+.product-percent {
+    width: 50px;
+    height: 50px;
+    background-image: url('https://theme.hstatic.net/1000197303/1001046599/14/tag-sale.png?v=9976');
+    background-size: cover;
+    color: white;
+}
+.product-whitelist i {
+    color: #D37171;
+}
+.product-whitelist button {
+    border-radius: 50%;
+}
+`;
+export default function ProductItem({data = {}}) {
+
+  // console.log(data)
+  const imgLinkDefault = 'https://product.hstatic.net/1000197303/product/pro_da_01_2_fbab52be715148d6b4f8f88c82825e2b_grande.jpg';
+  
   return (
     <DivParent>
-      <Link to="/product/1">
+      <Link to={`/product/${data.id}`}>
         <div className="product-img">
-          <Image src="https://product.hstatic.net/1000197303/product/pro_da_01_2_fbab52be715148d6b4f8f88c82825e2b_grande.jpg" />
+          <Image src={ data?.thumbnail ? urlIMG + data.thumbnail.url : imgLinkDefault} />
         </div>
         <span className="mt-4 fw-light b-lock">
-          Áo kiểu sơ mi tay dài thắt nơ
+          
+          {data?.product_name ? data?.product_name : "Áo kiểu sơ mi tay dài thắt nơ"}
         </span>
       </Link>
       <div className="product-price my-1">
-        <span className="text-danger me-2">248,500₫</span>
-        <small className="text-decoration-line-through">355,000₫</small>
+        <span className="text-danger me-2">{data?.price ? formatNumberThoundSand(data.price) + '₫' : "248,500₫"}</span>
+        <small className="text-decoration-line-through">{data?.promotion_price ? formatNumberThoundSand(data.promotion_price) + '₫': "350,500₫"}</small>
       </div>
       <div className="product-color d-flex">
         <div

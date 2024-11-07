@@ -1,23 +1,24 @@
 import { Row, Col, Card, Image } from "react-bootstrap";
 import styled from "styled-components";
+const DivParent = styled.div`
+.total-quantity {
+  width: 20px;
+  height: 20px;
+  color: white;
+  top: -10%;
+  right: -10%;
+  border-radius: 50%;
+  background-color: #0000008a;
+}
+.title-product-checkout, .price {
+  font-size: 14px;
+}
+.title-variant {
+  font-size: 12px;
+}
+`;
 export default function ProductItemCheckout() {
-  const DivParent = styled.div`
-  .total-quantity {
-    width: 20px;
-    height: 20px;
-    color: white;
-    top: -10%;
-    right: -10%;
-    border-radius: 50%;
-    background-color: #0000008a;
-  }
-  .title-product-checkout, .price {
-    font-size: 14px;
-  }
-  .title-variant {
-    font-size: 12px;
-  }
-  `;
+
   return (
     <DivParent className="mb-2">
       <Row>

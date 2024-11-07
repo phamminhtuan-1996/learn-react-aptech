@@ -2,22 +2,23 @@ import {Image, Button} from 'react-bootstrap';
 import styled from 'styled-components';
 import TagVariantSize from './TagVariantSize';
 import Quantity from '../components/Quantity';
+const DivParent = styled.div`
+.cart-title{
+    font-size: 18px;
+}
+.quantity {
+    width: 160px;
+    button:nth-child(1) {
+        color: #D37171;
+    }
+    button:nth-child(3) {
+        background-color: #D37171;
+        color: white;
+    }
+}
+`
 export default function CartItem() {
-    const DivParent = styled.div`
-        .cart-title{
-            font-size: 18px;
-        }
-        .quantity {
-            width: 160px;
-            button:nth-child(1) {
-                color: #D37171;
-            }
-            button:nth-child(3) {
-                background-color: #D37171;
-                color: white;
-            }
-        }
-    `
+
     return ( 
         <DivParent className='d-flex align-items-center mb-4'>
            <div className='w-75 d-flex'>

@@ -1,8 +1,6 @@
 import { Carousel, Image } from "react-bootstrap";
 import styled from "styled-components";
-
-export default function SliderHome() {
-  const DivParent = styled.div`
+const DivParent = styled.div`
     img {
         width: 100%;
         height: 500px;
@@ -25,6 +23,8 @@ export default function SliderHome() {
         text-decoration: none;
      }
   `;
+export default function SliderHome() {
+  
   return (
     <DivParent>
       <Carousel prevIcon={<i className="fa-solid fa-arrow-left"></i>} nextIcon={<i className="fa-solid fa-arrow-right"></i>}>

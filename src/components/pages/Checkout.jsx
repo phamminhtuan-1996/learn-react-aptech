@@ -11,78 +11,78 @@ import {
 import styled from "styled-components";
 import SelectForm from "../../components/SelectForm";
 import ProductItemCheckout from "../ProductItemCheckout";
-
+const DivParent = styled.div`
+padding: 56px;
+height: 100vh;
+&::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+  display: block;
+  width: 50%;
+  height: 100%;
+  background-color: #fffdfa;
+  z-index: -1;
+}
+&::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  content: "";
+  display: block;
+  width: 50%;
+  height: 100%;
+  background-color: #fafafa;
+  border-left: 1px solid #e1e1e1;
+  z-index: -1;
+}
+.logo {
+  height: 54px;
+}
+.home a {
+  color: #338dbc !important;
+}
+.form-control {
+  height: 52px;
+}
+.accordion-button {
+  &::after {
+    display: none;
+  }
+}
+.accordion-button.collapsed {
+  background-color: white;
+}
+.accordion-button {
+  background-color: white;
+}
+.accordion-body {
+  background-color: #fafafa;
+}
+.form-check-input {
+    border-color: black;
+}
+.form-check-label {
+    color: black!important;
+}
+.btn-use-voucher {
+    background-color: #c8c8c8;
+    border-color: #c8c8c8;
+    transition: 1s;
+    &:hover {
+        background-color: black;
+    }
+}
+.label-bill {
+    font-size: 14px;
+}
+.title-program {
+    font-size: 18px;
+}
+`;
 export default function Checkout() {
-  const DivParent = styled.div`
-    padding: 56px;
-    height: 100vh;
-    &::before {
-      position: absolute;
-      top: 0;
-      left: 0;
-      content: "";
-      display: block;
-      width: 50%;
-      height: 100%;
-      background-color: #fffdfa;
-      z-index: -1;
-    }
-    &::after {
-      position: absolute;
-      top: 0;
-      right: 0;
-      content: "";
-      display: block;
-      width: 50%;
-      height: 100%;
-      background-color: #fafafa;
-      border-left: 1px solid #e1e1e1;
-      z-index: -1;
-    }
-    .logo {
-      height: 54px;
-    }
-    .home a {
-      color: #338dbc !important;
-    }
-    .form-control {
-      height: 52px;
-    }
-    .accordion-button {
-      &::after {
-        display: none;
-      }
-    }
-    .accordion-button.collapsed {
-      background-color: white;
-    }
-    .accordion-button {
-      background-color: white;
-    }
-    .accordion-body {
-      background-color: #fafafa;
-    }
-    .form-check-input {
-        border-color: black;
-    }
-    .form-check-label {
-        color: black!important;
-    }
-    .btn-use-voucher {
-        background-color: #c8c8c8;
-        border-color: #c8c8c8;
-        transition: 1s;
-        &:hover {
-            background-color: black;
-        }
-    }
-    .label-bill {
-        font-size: 14px;
-    }
-    .title-program {
-        font-size: 18px;
-    }
-  `;
+
   return (
     <DivParent className="position-relative">
       <Container>
