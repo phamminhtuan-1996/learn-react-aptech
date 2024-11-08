@@ -10,7 +10,7 @@ import {
   Accordion,
 } from "react-bootstrap";
 import {Context} from '../../utils/AppContext';
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import { getImgStrapi, formatNumberThoundSand, topFunction } from "../../utils/helper";
 import product from "../../api/product";
@@ -60,7 +60,7 @@ export default function ProductDetails() {
   const [listProductByCate, setListProductByCate] = useState([]);
   const [dataProduct, setDataProduct] = useState({});
   const [imgTarget, setImgTarget] = useState(
-    "https://product.hstatic.net/1000197303/product/pro_trang_1_cf82f79ade3247ea9614f98e08a714a9_master.jpg"
+    "https://ih1.redbubble.net/image.4905811447.8675/flat,750x,075,f-pad,750x1000,f8f8f8.jpg"
   );
 
   const fetchProductGeneral = async () => {
@@ -196,7 +196,12 @@ export default function ProductDetails() {
             Trang chủ
           </Breadcrumb.Item>
           <Breadcrumb.Item>Tổng quan sản phẩm</Breadcrumb.Item>
-          <Breadcrumb.Item active>Váy</Breadcrumb.Item>
+          <Breadcrumb.Item active>
+            <Link to={`/category/${dataProduct.category_product?.id}`}>
+
+              {dataProduct.category_product?.name}
+            </Link>
+          </Breadcrumb.Item>
         </Breadcrumb>
         <Row className="mt-4">
           <Col md={6}>

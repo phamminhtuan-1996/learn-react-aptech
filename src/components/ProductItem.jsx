@@ -62,7 +62,7 @@ a {
 export default function ProductItem({data = {}, isInPageWhiteList = false, removeItemInWhiteList}) {
   const {updateWhiteList, setUpdateWhiteList} = useContext(Context);
   const [isWhiteList, setWhiteList] = useState(false);
-  const imgLinkDefault = 'https://product.hstatic.net/1000197303/product/pro_da_01_2_fbab52be715148d6b4f8f88c82825e2b_grande.jpg';
+  const imgLinkDefault = 'https://ih1.redbubble.net/image.4905811447.8675/flat,750x,075,f-pad,750x1000,f8f8f8.jpg';
   const addWhiteList = () => {
     let getLocal = localStorage.getItem('whitelist');
     let result = [];

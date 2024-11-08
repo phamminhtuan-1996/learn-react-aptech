@@ -12,11 +12,16 @@ async function getProductVariant(value) {
     return fetch(url+'product-variants'+'?'+objectToStrapiQuery(value)).then((res) => res.json()).then((res) => res);
 }
 
+async function getProductDetails(value) {
+    return fetch(url+'products/'+ value+'?populate=*').then((res) => res.json()).then((res) => res);
+}
+
 
 const product = {
     listProductGeneral,
     listCate,
-    getProductVariant
+    getProductVariant,
+    getProductDetails
 }
 
 export default product;
