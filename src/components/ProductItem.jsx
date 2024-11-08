@@ -1,8 +1,10 @@
+import {useEffect, useState, useContext} from 'react';
 import {urlIMG} from '../api/constant'
 import {formatNumberThoundSand} from '../utils/helper';
 import { Image, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { Context } from '../utils/AppContext';
 const DivParent = styled.div`
 position: relative;
 margin-bottom: 1rem;
@@ -35,9 +37,9 @@ a {
   height: 15px;
   border-radius: 50%;
 }
-.fa-solid {
+.fa-heart {
   color: #ffff;
-  font-size: 12px;
+  font-size: 14px;
 }
 .product-percent {
     width: 50px;
@@ -45,6 +47,10 @@ a {
     background-image: url('https://theme.hstatic.net/1000197303/1001046599/14/tag-sale.png?v=9976');
     background-size: cover;
     color: white;
+    &.not-promotion {
+      color: transparent;
+      background-image: unset
+    }
 }
 .product-whitelist i {
     color: #D37171;
@@ -53,11 +59,63 @@ a {
     border-radius: 50%;
 }
 `;
-export default function ProductItem({data = {}}) {
-
-  // console.log(data)
+export default function ProductItem({data = {}, isInPageWhiteList = false, removeItemInWhiteList}) {
+  const {updateWhiteList, setUpdateWhiteList} = useContext(Context);
+  const [isWhiteList, setWhiteList] = useState(false);
   const imgLinkDefault = 'https://product.hstatic.net/1000197303/product/pro_da_01_2_fbab52be715148d6b4f8f88c82825e2b_grande.jpg';
-  
+  const addWhiteList = () => {
+    let getLocal = localStorage.getItem('whitelist');
+    let result = [];
+    if (!getLocal) {
+      localStorage.setItem('whitelist', JSON.stringify([data]));
+      return;
+    }
+    result = JSON.parse(getLocal);
+    result.push(data);
+    localStorage.setItem('whitelist', JSON.stringify(result));
+  }
+  const removeWhitelist = () => {
+    let getLocal = localStorage.getItem('whitelist');
+    if (!getLocal) {
+      return;
+    }
+    const result = JSON.parse(getLocal);
+    localStorage.setItem('whitelist', JSON.stringify(result.filter((item) => item.id !== data.id)));
+  }
+  const handleSaveWhiteList = () => {
+      if (isInPageWhiteList) {
+        removeItemInWhiteList(data.id);
+      }
+      if (!isWhiteList) {
+        addWhiteList();
+        setWhiteList(true);
+        setUpdateWhiteList(!updateWhiteList);
+        return;
+      }
+      removeWhitelist();
+      setWhiteList(false);
+      setUpdateWhiteList(!updateWhiteList);
+  }
+  const checkWhiteList = () => {
+    let getLocal = localStorage.getItem('whitelist');
+    if (!getLocal) {
+      return;
+    }
+    let getWhiteList =  JSON.parse(getLocal);
+    const findWhitelist = getWhiteList.find((item) => item.id === data.id);
+    setWhiteList(findWhitelist ? true : false);
+  }
+  const calculateDiscountPercentage = (promotionPrice, originalPrice) => {
+    if (originalPrice <= 0 || promotionPrice < 0 || promotionPrice > originalPrice) {
+      return 0;
+    }
+    
+    const discountPercentage = ((originalPrice - promotionPrice) / originalPrice) * 100;
+    return discountPercentage.toFixed(2);
+  }
+  useEffect(() => {
+    checkWhiteList();
+  })
   return (
     <DivParent>
       <Link to={`/product/${data.id}`}>
@@ -71,7 +129,7 @@ export default function ProductItem({data = {}}) {
       </Link>
       <div className="product-price my-1">
         <span className="text-danger me-2">{data?.price ? formatNumberThoundSand(data.price) + '₫' : "248,500₫"}</span>
-        <small className="text-decoration-line-through">{data?.promotion_price ? formatNumberThoundSand(data.promotion_price) + '₫': "350,500₫"}</small>
+        <small className="text-decoration-line-through">{data?.promotion_price ? formatNumberThoundSand(data.promotion_price) + '₫': ""}</small>
       </div>
       <div className="product-color d-flex">
         <div
@@ -113,10 +171,20 @@ export default function ProductItem({data = {}}) {
         </div>
       </div>
       <div className="product-top-bar d-flex justify-content-between">
-        <div className="product-percent d-flex justify-content-center align-items-center">-30%</div>
+        <div className={`product-percent d-flex justify-content-center align-items-center ${data?.promotion_price ? "" : 'not-promotion'}`}>
+          -
+        {data?.promotion_price && (
+          calculateDiscountPercentage(Number(data.price), Number(data.promotion_price)).replace('.00', "")
+        )}%
+        </div>
         <div className="product-whitelist">
-            <Button variant="light" className="m-2">
-                <i className="fa-regular fa-heart"></i>
+            <Button variant="light" className="m-2" onClick={handleSaveWhiteList}>
+                {isWhiteList && (
+                  <i className="fa-solid fa-heart"></i>
+                )}
+                  {!isWhiteList && (
+                    <i className="fa-regular fa-heart"></i>
+                  )}
             </Button>
         </div>
       </div>

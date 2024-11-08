@@ -41,13 +41,23 @@ height: 57px;
   color:white;
   font-size: 12px;
 }
+.total-whitelist {
+  top: -10px;
+  right: -10px;
+  background-color: #D37171;
+  width: 20px;
+  height: 20px;
+  color:white;
+  font-size: 12px;
+}
 `;
 
 export default function MainMenu() {
   const [isFixed, setFixed] = useState(false);
   const [listCate, setListCate] = useState([]);
   const [totalCart, setTotalCart] = useState(0);
-  const {updateCart} = useContext(Context);
+  const [totalWhitelist, setTotalWhitelist] = useState(0);
+  const {updateCart, updateWhiteList} = useContext(Context);
   
   const fetchListCate = async () => {
     const body = {
@@ -69,10 +79,24 @@ export default function MainMenu() {
     })
     setTotalCart(total);
   }
+  const getTotalWhitelist = () => {
+    const getTotalCart = localStorage.getItem('whitelist');
+    if (!getTotalCart) {
+      return;
+    }
+    const totalNumber = JSON.parse(getTotalCart);
+    setTotalWhitelist(totalNumber.length);
+  }
   useEffect(() => {
     getTotalCart();
   }, [updateCart])
+
   useEffect(() => {
+    getTotalWhitelist();
+  }, [updateWhiteList])
+  
+  useEffect(() => {
+    getTotalWhitelist();
     getTotalCart();
     fetchListCate();
   }, [])
@@ -101,8 +125,13 @@ useEffect(() => {
               ))}
           </Nav>
           <div className="list-button-navbar d-flex">
-            <div className="navbar-heart me-2">
+            <div className="navbar-heart position-relative me-2">
+              <Link to="/whitelist">
               <i className="fa-regular fa-heart"></i>
+              </Link>
+              <div className="total-whitelist position-absolute d-flex justify-content-center align-items-center rounded-circle">
+                {totalWhitelist}
+              </div>
             </div>
             <div className="navbar-cart position-relative me-2">
               <Link to="/cart">

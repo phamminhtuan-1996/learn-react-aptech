@@ -26,7 +26,7 @@ export default function CartItem({data={}, remoItem, changeQuantity}) {
         setQuantity(val);
         const getListItemLocal = JSON.parse(localStorage.getItem('list-cart'));
         let result = getListItemLocal;
-        const index = getListItemLocal.findIndex((item) => item.idProduct === data.idProduct);
+        const index = getListItemLocal.findIndex((item) => item.id_variant === data.id_variant);
         result[index].quantity = Number(val);
         changeQuantity(val)
         localStorage.setItem('list-cart', JSON.stringify(result));

@@ -202,11 +202,11 @@ export default function Checkout() {
               src="https://file.hstatic.net/1000197303/file/logo_0caef1aea53f4b6281978ef2546b486b.png"
             />
             <Breadcrumb className="mt-4">
-              <Breadcrumb.Item className="home" href="/cart">
-                Giỏ Hàng
+              <Breadcrumb.Item className="home" href="/">
+                Trang chủ
               </Breadcrumb.Item>
-              <Breadcrumb.Item href="https://getbootstrap.com/docs/4.0/components/breadcrumb/">
-                Thông tin giao hàng
+              <Breadcrumb.Item href="/cart">
+                Giỏ Hàng
               </Breadcrumb.Item>
               <Breadcrumb.Item active>Phương thức thanh toán</Breadcrumb.Item>
             </Breadcrumb>

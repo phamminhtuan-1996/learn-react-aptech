@@ -10,6 +10,7 @@ import NotFound from "./pages/NotFound";
 import PageSuccess from "./pages/PageSuccess";
 import Login from "./pages/Login";
 import UserProfile from "./pages/UserProfile";
+import WhiteList from '../components/pages/WhiteList';
 export default function RoutesComponent() {
     return (
         <Routes>
@@ -22,6 +23,7 @@ export default function RoutesComponent() {
                 <Route path="success/:id_transaction" element={<PageSuccess/>} />
                 <Route path="login" element={<Login/>} />
                 <Route path="user" element={<UserProfile/>} />
+                <Route path="whitelist" element={<WhiteList/>} />
             </Route>
             <Route path="checkout" element={<Checkout/>} />
             <Route path="*" element={<NotFound/>} />
