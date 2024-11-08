@@ -10,10 +10,12 @@ const DivParent = styled.div``;
 export default function Cart() {
   const navigate = useNavigate();
   const [listCart, setListCard] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [totalQuanityCart, setTotalQuantityCard] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const {updateCart, setUpdateCart} = useContext(Context);
   const handleRemoveItem = (id) => {
+    setIsLoading(true);
     const updatedListCart = listCart.filter((item) => item.id_variant !== id);
     setListCard([]);
     localStorage.setItem('list-cart', JSON.stringify(updatedListCart))
@@ -21,6 +23,7 @@ export default function Cart() {
       setListCard(updatedListCart)
       setUpdateCart(!updateCart);
       updateTotalCart();
+      setIsLoading(false);
      }, 200)
   }
   const handleRedirectCheckout = () => {
@@ -65,7 +68,12 @@ export default function Cart() {
           <Col md={12}>
             <h3 className="text-center my-4">Giỏ Hàng</h3>
           </Col>
-          {listCart.length === 0 && (
+          {isLoading && (
+             <Col md={8} className="d-flex flex-column align-items-center">
+              <h1 className="text-center">Loading...</h1>
+            </Col>
+          )}
+          {!isLoading && listCart.length === 0 && (
              <Col md={8} className="d-flex flex-column align-items-center">
               <Image className="w-75" src="https://theme.hstatic.net/1000197303/1001046599/14/empty-cart-desktop.png?v=10006"/>
               <span className="text-center">Giỏ hàng của bạn đang trống <br/> Hãy thêm sản phẩm vào giỏ nhé!</span>
