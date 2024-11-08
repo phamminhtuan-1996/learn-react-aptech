@@ -36,7 +36,7 @@ export default function WhiteList() {
     <DivParent>
       <Container>
 
-        <h3 className="fw-light my-4 text-center">White list</h3>
+        <h3 className="fw-light my-4 text-center">Wishlist</h3>
         {listProduct.length === 0 && (
             <h1 className="text-center">Chưa có sản phẩm nào</h1>
         )}

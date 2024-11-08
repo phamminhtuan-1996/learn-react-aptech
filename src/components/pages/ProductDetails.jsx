@@ -46,14 +46,19 @@ padding-top: 2rem;
     border: 1px solid #d37171;
   }
 }
+.wishlist-btn {
+  color: #D37171;
+  font-size: 20px;
+}
 `;
 export default function ProductDetails() {
   const param = useParams();
   const navigate = useNavigate();
-  const {setShowNotication, setMessageNoti, updateCart, setUpdateCart} = useContext(Context)
+  const {setShowNotication, setMessageNoti, updateCart, setUpdateCart, updateWhiteList, setUpdateWhiteList} = useContext(Context)
   const listSize = ["S", "M", "L"];
   const [valSize, setValSize] = useState("S");
   const [valColor, setValColor] = useState("white");
+  const [isWhiteList, setWhiteList] = useState(false);
   const [valQuantity, setValQuantity] = useState(1);
   const [listColor, setListColor] = useState([]);
   const [listImg, setListImg] = useState([]);
@@ -76,7 +81,6 @@ export default function ProductDetails() {
       populate: "*",
     };
     product.listProductGeneral(body).then((res) => {
-      console.log("fetchProductGeneral", res);
     setDataProduct(res.data[0]);
     fetchProductByCateId(res.data[0].category_product.id);
     setImgTarget(getImgStrapi(res.data[0].thumbnail))
@@ -98,7 +102,6 @@ export default function ProductDetails() {
         populate: 'thumbnail'
       };
     product.listProductGeneral(body).then((res) => {
-        console.log('fetchProductGeneral', res);
         setListProductByCate(res.data);
     })
 }
@@ -119,7 +122,6 @@ export default function ProductDetails() {
       populate: "*",
     };
     const res = await product.getProductVariant(body);
-    console.log("fetchProductVariant", res);
     setListColor(res.data);
   };
   const handleSetColor = (val) => {
@@ -170,6 +172,48 @@ export default function ProductDetails() {
     handleAddtoCart();
     navigate('/checkout');
   }
+  const addWhiteList = () => {
+    let getLocal = localStorage.getItem('whitelist');
+    let result = [];
+    if (!getLocal) {
+      localStorage.setItem('whitelist', JSON.stringify([dataProduct]));
+      return;
+    }
+    result = JSON.parse(getLocal);
+    result.push(dataProduct);
+    localStorage.setItem('whitelist', JSON.stringify(result));
+  }
+  const removeWhitelist = () => {
+    let getLocal = localStorage.getItem('whitelist');
+    if (!getLocal) {
+      return;
+    }
+    const result = JSON.parse(getLocal);
+    localStorage.setItem('whitelist', JSON.stringify(result.filter((item) => item.id !== dataProduct.id)));
+  }
+  const handleSaveWhiteList = () => {
+    if (!isWhiteList) {
+      addWhiteList();
+      setWhiteList(true);
+      setUpdateWhiteList(!updateWhiteList);
+      return;
+    }
+    removeWhitelist();
+    setWhiteList(false);
+    setUpdateWhiteList(!updateWhiteList);
+  }
+  const checkWhiteList = () => {
+    let getLocal = localStorage.getItem('whitelist');
+    if (!getLocal) {
+      console.log('hahahaha')
+      setWhiteList(false);
+      return;
+    }
+    let getWhiteList =  JSON.parse(getLocal);
+    console.log('getWhiteList', getWhiteList, dataProduct);
+    const findWhitelist = getWhiteList.find((item) => item.id === dataProduct.id);
+    setWhiteList(findWhitelist ? true : false);
+  }
   useEffect(() => {
     if (listColor.length === 0) {
       return;
@@ -177,13 +221,17 @@ export default function ProductDetails() {
     handleSetColor(listColor[0].id);
   }, [listColor]);
   useEffect(() => {
-    fetchProductGeneral();
+    fetchProductGeneral()
     fetchProductVariant();
+   
     topFunction();
   }, []);
   useEffect(() => {
+    checkWhiteList();
+  }, [dataProduct])
+  useEffect(() => {
     setValQuantity(1);
-    fetchProductGeneral();
+    fetchProductGeneral()
     fetchProductVariant();
     topFunction();
   }, [param]);
@@ -224,7 +272,12 @@ export default function ProductDetails() {
             </Row>
           </Col>
           <Col md={6}>
-            <h3 className="fw-light">{dataProduct.product_name}</h3>
+            <h3 className="fw-light">
+            <Button variant="light" title="Thêm vào danh sách yêu thích" className="wishlist-btn bg-white border-none me-2" onClick={handleSaveWhiteList}>
+              <i className={` ${isWhiteList ? "fa-solid" : "fa-regular" }  fa-heart`}></i>
+            </Button>
+              {dataProduct.product_name}
+            </h3>
             <div className="d-flex justify-content-between">
               <span>SKU: {dataProduct.sku}</span>
               <span className="text-black-50">Hiện tại còn 32 sản phẩm.</span>

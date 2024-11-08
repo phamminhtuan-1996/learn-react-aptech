@@ -64,7 +64,6 @@ export default function MainMenu() {
       sort: 'createdAt:asc',
     };
     const res = await product.listCate(body)
-    console.log('fetchListCate', res.data);
     setListCate(res.data);
   }
   const getTotalCart = () => {

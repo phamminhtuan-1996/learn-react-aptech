@@ -3,9 +3,12 @@ import {Context} from '../utils/AppContext';
 import Toast from 'react-bootstrap/Toast';
 import styled from 'styled-components';
 const DivParent = styled.div`
+    .toast-body {
+        color: white;
+    }
     .toast {
-        left: unset!important;
-        right: 0!important;
+        left: unset !important;
+        right: 0 !important;
     }
 `
 export default function ToastNoftication() {
@@ -20,7 +23,7 @@ export default function ToastNoftication() {
         }
         setTimeout(() => {
             setShowNotication(false);
-        }, 3000)
+        }, 1200)
     }, [isShowNoftication])
     return (
         <DivParent>
