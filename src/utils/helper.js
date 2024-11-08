@@ -54,7 +54,11 @@ export function queryStringStrapi(obj) {
   }
 
   export function getImgStrapi(obj, type = null) {
-    if (type) {
+    console.log('getImgStrapi', obj)
+    if (!obj) {
+      return;
+    }
+    if (type && obj?.formats[type]) {
       return urlIMG + obj.formats[type].url;
     }
     return urlIMG + obj.url;

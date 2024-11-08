@@ -182,6 +182,7 @@ export default function ProductDetails() {
     topFunction();
   }, []);
   useEffect(() => {
+    setValQuantity(1);
     fetchProductGeneral();
     fetchProductVariant();
     topFunction();

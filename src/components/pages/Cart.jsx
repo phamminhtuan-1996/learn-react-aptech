@@ -14,11 +14,14 @@ export default function Cart() {
   const [totalPrice, setTotalPrice] = useState(0);
   const {updateCart, setUpdateCart} = useContext(Context);
   const handleRemoveItem = (id) => {
-    let reuslt = JSON.parse(localStorage.getItem('list-cart'));
-    setListCard(listCart.filter((item) => item.id_variant !== id))
-    localStorage.setItem('list-cart', JSON.stringify(reuslt.filter((item) => item.id_variant !== id)))
-    setUpdateCart(!updateCart);
-    
+    const updatedListCart = listCart.filter((item) => item.id_variant !== id);
+    setListCard([]);
+    localStorage.setItem('list-cart', JSON.stringify(updatedListCart))
+    setTimeout(() => {
+      setListCard(updatedListCart)
+      setUpdateCart(!updateCart);
+      updateTotalCart();
+     }, 200)
   }
   const handleRedirectCheckout = () => {
     navigate('/checkout');
@@ -41,13 +44,17 @@ export default function Cart() {
     setUpdateCart(!updateCart)
   }
   const handleSetQuantity = (val) => {
-    console.log(val);
-    setUpdateCart(!updateCart);
    const deboundId = setTimeout(() => {
+    setUpdateCart(!updateCart);
     updateTotalCart();
-   }, 1000)
-   clearTimeout(deboundId);
+   }, 500)
+   return () => {
+    clearTimeout(deboundId);
+   }
   }
+  useEffect(() => {
+    console.log('listCart useEffect',listCart);
+  }, [listCart])
   useEffect(() => {
     updateTotalCart();
   }, [])
