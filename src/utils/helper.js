@@ -64,3 +64,7 @@ export function queryStringStrapi(obj) {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
   }
+
+  export function generateRandomNumbers(length) {
+    return Array.from({ length }, () => Math.floor(Math.random() * 100));
+  }

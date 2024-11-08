@@ -50,7 +50,7 @@ padding-top: 2rem;
 export default function ProductDetails() {
   const param = useParams();
   const navigate = useNavigate();
-  const {setShowNotication, setMessageNoti} = useContext(Context)
+  const {setShowNotication, setMessageNoti, updateCart, setUpdateCart} = useContext(Context)
   const listSize = ["S", "M", "L"];
   const [valSize, setValSize] = useState("S");
   const [valColor, setValColor] = useState("white");
@@ -163,6 +163,7 @@ export default function ProductDetails() {
     result = [data, ...result];
     localStorage.setItem('list-cart', JSON.stringify(result));
     setMessageNoti('Thêm giỏ hàng thành công');
+    setUpdateCart(!updateCart)
     setShowNotication(true)
   }
   const handleGoCheckout = () => {

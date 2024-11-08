@@ -1,10 +1,11 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useContext} from 'react';
 import product from '../api/product';
 import { Container, Nav, Navbar, Image } from "react-bootstrap";
 import { useParams } from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import Logo from '../img/logo.png'
 import styled from 'styled-components';
+import { Context } from '../utils/AppContext';
 const StyledNavbar = styled.div`
 height: 57px;
 .nav-link {
@@ -46,6 +47,7 @@ export default function MainMenu() {
   const [isFixed, setFixed] = useState(false);
   const [listCate, setListCate] = useState([]);
   const [totalCart, setTotalCart] = useState(0);
+  const {updateCart} = useContext(Context);
   
   const fetchListCate = async () => {
     const body = {
@@ -69,6 +71,9 @@ export default function MainMenu() {
   }
   useEffect(() => {
     getTotalCart();
+  }, [updateCart])
+  useEffect(() => {
+    getTotalCart();
     fetchListCate();
   }, [])
 
@@ -86,9 +91,9 @@ useEffect(() => {
     <StyledNavbar>
       <Navbar expand="lg" bg="light" className={`${isFixed ? "fixed-top" : ""}`}>
         <Container>
-          <Navbar.Brand href="/">
+          <Link to='/' className='navbar-brand'>
             <Image src={Logo}/>
-          </Navbar.Brand>
+          </Link>
           <Nav>
                <Link className='nav-link' to='/'>Home</Link> 
               {listCate.map((item, key) => (
@@ -108,7 +113,9 @@ useEffect(() => {
               </div>
             </div>
             <div className="navbar-user me-2">
-            <i className="fa-regular fa-user"></i>
+              <Link to='/login'>
+                <i className="fa-regular fa-user"></i>
+              </Link>
             </div>
             <div className="navbar-search">
               <Link to="/search">

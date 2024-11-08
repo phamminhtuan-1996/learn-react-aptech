@@ -18,10 +18,10 @@ const DivParent = styled.div`
   font-size: 12px;
 }
 `;
-export default function ProductItemCheckout({data = {}}) {
+export default function ProductItemCheckout({data = {}, className=""}) {
 
   return (
-    <DivParent className="mb-2">
+    <DivParent className={`mb-2 ${className}`}>
       <Row>
         <Col md={2}>
           <Card className="px-2 postion-relative">

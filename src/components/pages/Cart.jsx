@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Container, Row, Col, Button, Image } from "react-bootstrap";
 import {formatNumberThoundSand} from '../../utils/helper';
 import { useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
+import { Context } from "../../utils/AppContext";
 import styled from "styled-components";
 import CartItem from "../CartItem";
 const DivParent = styled.div``;
@@ -11,10 +12,13 @@ export default function Cart() {
   const [listCart, setListCard] = useState([]);
   const [totalQuanityCart, setTotalQuantityCard] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
+  const {updateCart, setUpdateCart} = useContext(Context);
   const handleRemoveItem = (id) => {
     let reuslt = JSON.parse(localStorage.getItem('list-cart'));
-    setListCard(listCart.filter((item) => item.idProduct !== id))
-    localStorage.setItem('list-cart', JSON.stringify(reuslt.filter((item) => item.idProduct !== id)))
+    setListCard(listCart.filter((item) => item.id_variant !== id))
+    localStorage.setItem('list-cart', JSON.stringify(reuslt.filter((item) => item.id_variant !== id)))
+    setUpdateCart(!updateCart);
+    
   }
   const handleRedirectCheckout = () => {
     navigate('/checkout');
@@ -32,12 +36,18 @@ export default function Cart() {
       totalPrice += item.price * item.quantity;
     })
     setTotalPrice(totalPrice);
-    setTotalQuantityCard(total)
+    setTotalQuantityCard(total) 
     setListCard(listcartd);
+    setUpdateCart(!updateCart)
   }
-  useEffect(() => {
+  const handleSetQuantity = (val) => {
+    console.log(val);
+    setUpdateCart(!updateCart);
+   const deboundId = setTimeout(() => {
     updateTotalCart();
-  }, [listCart])
+   }, 1000)
+   clearTimeout(deboundId);
+  }
   useEffect(() => {
     updateTotalCart();
   }, [])
@@ -68,7 +78,7 @@ export default function Cart() {
               </div>
             </div>
             {listCart.map((item, key) => (
-              <CartItem data={item} key={key} remoItem={handleRemoveItem}/>
+              <CartItem data={item} key={key} remoItem={handleRemoveItem} changeQuantity={handleSetQuantity}/>
             ))}
             {/* <CartItem /> */}
           </Col>

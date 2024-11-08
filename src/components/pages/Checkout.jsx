@@ -13,6 +13,10 @@ import {
 import styled from "styled-components";
 import SelectForm from "../../components/SelectForm";
 import ProductItemCheckout from "../ProductItemCheckout";
+import checkout from '../../api/checkout';
+import { useNavigate } from 'react-router-dom';
+
+
 const DivParent = styled.div`
   padding: 56px;
   height: 100vh;
@@ -84,6 +88,7 @@ const DivParent = styled.div`
   }
 `;
 export default function Checkout() {
+  const navigate = useNavigate();
   const [listProduct, setListProduct] = useState([]);
   const [addressProvince, setAddressProvince] = useState({
     province_code: -1,
@@ -93,41 +98,6 @@ export default function Checkout() {
   const [listProvince, setProvince] = useState([]);
   const [listDistricts, setDistricts] = useState([]);
   const [listWard, setWard] = useState([]);
-  //   {
-  //     "id": 3,
-  //     "documentId": "wg7zqpq238ty1d7upy508gs9",
-  //     "name_customer": "Phạm Minh Tuấn",
-  //     "email": "pmtuan196@gmail.com",
-  //     "address": "106 đường 2, kp 2, phường phước bình, quận 9, tphcm",
-  //     "createdAt": "2024-11-07T09:54:00.833Z",
-  //     "updatedAt": "2024-11-07T09:54:38.445Z",
-  //     "publishedAt": "2024-11-07T09:54:38.453Z",
-  //     "list_product": [
-  //         {
-  //             "idProduct": 45,
-  //             "product_name": "Quần ống suông lưng cao dây kéo sau",
-  //             "quantity": 1,
-  //             "name_variant": "Xanh dương",
-  //             "id_variant": 67,
-  //             "thumbnail": "http://localhost:1337/uploads/pro_xanh_duong_01_2_d8222e9279fe466faae745ba3ba831f0_master_40bf8f1961.jpg",
-  //             "size": "S",
-  //             "price": "346500"
-  //         },
-  //         {
-  //             "idProduct": 45,
-  //             "product_name": "Quần ống suông lưng cao dây kéo sau",
-  //             "quantity": 1,
-  //             "name_variant": "Xanh dương 02",
-  //             "id_variant": 70,
-  //             "thumbnail": "http://localhost:1337/uploads/pro_xanh_duong_1_dcbd46c14712464cad65a9637f03cfb1_master_a44a1e8b17.jpg",
-  //             "size": "M",
-  //             "price": "346500"
-  //         }
-  //     ],
-  //     "pick_up_at_store": null,
-  //     "address_pickup": null,
-  //     "phone": "0798208714"
-  // }
   const [dataInfo, setDataInfo] = useState({
     name_customer: "",
     email: "",
@@ -183,8 +153,27 @@ export default function Checkout() {
     const findDistricts = listDistricts.find((item) => item.code === Number(addressProvince.district_code))?.name;
     const findCity = listProvince.find((item) => item.code === Number(addressProvince.province_code))?.name;
     body.data.address = `${body.data.address}, ${findWard}, ${findDistricts}, ${findCity}`;
+    body.data.email = body.data.email.length > 0 ? body.data.email : "example@gmail.com";
     console.log("handlePostInfoCheckout body", body);
+    checkout.postCheckout(body).then((res) => {
+      if (!res.data) {
+        return;
+      }
+     localStorage.removeItem('list-cart');
+      navigate(`/success/${res.data.documentId}`);
+    })
   };
+
+  const refillInfoCheckout = () => {
+    const getLocal = localStorage.getItem('phone-login');
+    if (!getLocal) {
+      return;
+    }
+    setDataInfo((prev) => ({
+      ...prev,
+      phone: getLocal
+    }));
+  }
   useEffect(() => {
     console.log("province_code", addressProvince.province_code);
     if (addressProvince.province_code === -1) {
@@ -199,6 +188,7 @@ export default function Checkout() {
     fetchWards(addressProvince.district_code);
   }, [addressProvince.district_code]);
   useEffect(() => {
+    refillInfoCheckout();
     fetchCity();
     getItemProductCart();
   }, []);

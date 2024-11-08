@@ -20,7 +20,7 @@ const DivParent = styled.div`
     }
 }
 `
-export default function CartItem({data={}, remoItem}) {
+export default function CartItem({data={}, remoItem, changeQuantity}) {
     const [ValQUantity, setQuantity] = useState(data.quantity);
     const handleSetQuantity = (val) => {
         setQuantity(val);
@@ -28,6 +28,7 @@ export default function CartItem({data={}, remoItem}) {
         let result = getListItemLocal;
         const index = getListItemLocal.findIndex((item) => item.idProduct === data.idProduct);
         result[index].quantity = Number(val);
+        changeQuantity(val)
         localStorage.setItem('list-cart', JSON.stringify(result));
     }
     return ( 
@@ -49,7 +50,7 @@ export default function CartItem({data={}, remoItem}) {
            </div>
            <div className='w-25 d-flex justify-content-between'>
                 <Quantity value={ValQUantity} onChangeEvent={handleSetQuantity}/>
-                <Button variant='light' onClick={() => remoItem(data.idProduct)}><i className="fa-solid fa-trash"></i></Button>
+                <Button variant='light' onClick={() => remoItem(data.id_variant)}><i className="fa-solid fa-trash"></i></Button>
            </div>
         </DivParent>
     )

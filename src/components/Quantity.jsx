@@ -28,7 +28,7 @@ export default function Quantity({value = 0, min = -100, max=-1, onChangeEvent})
         onChangeEvent(method === 'plus' ? value + 1 : value - 1);
     }
     const handleOnchangeEventTyping = (e) => {
-        onChangeEvent(e.target.value);
+        onChangeEvent(Number(e.target.value));
     }
     return (
         <DivParent className='quantity d-flex'>

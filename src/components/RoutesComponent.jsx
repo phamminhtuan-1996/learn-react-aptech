@@ -7,6 +7,9 @@ import Cart from "./pages/Cart";
 import ProductSearch from "./pages/ProductSearch";
 import Checkout from "./pages/Checkout";
 import NotFound from "./pages/NotFound";
+import PageSuccess from "./pages/PageSuccess";
+import Login from "./pages/Login";
+import UserProfile from "./pages/UserProfile";
 export default function RoutesComponent() {
     return (
         <Routes>
@@ -16,6 +19,9 @@ export default function RoutesComponent() {
                 <Route path="product/:product_id" element={<ProductDetails/>} />
                 <Route path="cart" element={<Cart/>} />
                 <Route path="search" element={<ProductSearch/>} />
+                <Route path="success/:id_transaction" element={<PageSuccess/>} />
+                <Route path="login" element={<Login/>} />
+                <Route path="user" element={<UserProfile/>} />
             </Route>
             <Route path="checkout" element={<Checkout/>} />
             <Route path="*" element={<NotFound/>} />
