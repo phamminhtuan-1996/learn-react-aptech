@@ -359,7 +359,7 @@ export default function Checkout() {
             ))}
 
             <hr />
-            <Row>
+            {/* <Row>
               <Col md={9}>
                 <Form.Control placeholder="Mã giảm giá" />
               </Col>
@@ -372,8 +372,8 @@ export default function Checkout() {
                 </Button>
               </Col>
             </Row>
-            <hr />
-            <Row>
+            <hr /> */}
+            {/* <Row>
               <Col md={9} className="d-flex align-items-center">
                 <span className="title-program">
                   Chương trình khách hàng thân thiết
@@ -388,7 +388,7 @@ export default function Checkout() {
                 </Button>
               </Col>
             </Row>
-            <hr />
+            <hr /> */}
             <Row>
               <Col md={6}>
                 <span className="label-bill fw-light">Tạm tính</span>
@@ -400,7 +400,7 @@ export default function Checkout() {
                 <span className="label-bill fw-light">Phí vận chuyển</span>
               </Col>
               <Col md={6} className="d-flex justify-content-end">
-                <span className="value-bill fw-light">__</span>
+                <span className="value-bill fw-light">Free</span>
               </Col>
             </Row>
             <hr />
