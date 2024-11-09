@@ -39,7 +39,7 @@ export default function PageSuccess() {
         let total = 0;
         console.log(res.data);
         res.data.list_product.forEach((item) => {
-            total = total + Number(item.price);
+            total = total + (Number(item.price) * item.quantity);
         })
         setTotal(total)
         setDataInfo(res.data);
