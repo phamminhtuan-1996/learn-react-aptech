@@ -144,7 +144,7 @@ export default function ProductDetails() {
     console.log('getListProductCart', getListProductCart)
     let result = getListProductCart.length > 0 ? JSON.parse(getListProductCart) : [];
     console.log('before' , result);
-    const indexHavedResult = result.findIndex((item) => item.id_variant === valColor);
+    const indexHavedResult = result.findIndex((item) => item.id_variant === valColor && item.size === valSize);
     if (indexHavedResult > -1) {
       result[indexHavedResult].quantity = result[indexHavedResult].quantity + Number(valQuantity);
       localStorage.setItem('list-cart', JSON.stringify(result));
