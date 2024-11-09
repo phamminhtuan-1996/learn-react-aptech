@@ -205,7 +205,6 @@ export default function ProductDetails() {
   const checkWhiteList = () => {
     let getLocal = localStorage.getItem('whitelist');
     if (!getLocal) {
-      console.log('hahahaha')
       setWhiteList(false);
       return;
     }

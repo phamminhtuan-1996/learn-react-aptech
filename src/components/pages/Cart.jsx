@@ -29,8 +29,9 @@ export default function Cart() {
     setIsLoading(true);
     let updatedListCart = [];
     if (countId) {
+      console.log('countid', val)
       updatedListCart = listCart.filter(
-        (item) => !(item.id_variant === val.id && item.size !== val.size)
+        (item) => !(item.id_variant === val.id && item.size === val.size)
       );
     } else {
       updatedListCart = listCart.filter((item) => item.size !== val.size && item.id_variant !== val.id);

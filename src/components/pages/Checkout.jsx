@@ -10,6 +10,7 @@ import {
   Accordion,
   Button,
 } from "react-bootstrap";
+import {formatNumberThoundSand} from '../../utils/helper';
 import styled from "styled-components";
 import SelectForm from "../../components/SelectForm";
 import ProductItemCheckout from "../ProductItemCheckout";
@@ -90,6 +91,8 @@ const DivParent = styled.div`
 export default function Checkout() {
   const navigate = useNavigate();
   const [listProduct, setListProduct] = useState([]);
+  const [totalQuanityCart, setTotalQuantityCard] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
   const [addressProvince, setAddressProvince] = useState({
     province_code: -1,
     district_code: -1,
@@ -174,6 +177,23 @@ export default function Checkout() {
       phone: getLocal
     }));
   }
+  const updateTotalCart = () => {
+    const getListCart = localStorage.getItem('list-cart');
+    if (!getListCart) {
+      return;
+    }
+    const listcartd = JSON.parse(getListCart);
+    let total = 0;
+    let totalPrice = 0;
+    listcartd.forEach((item) => {
+      total += item.quantity;
+      totalPrice += item.price * item.quantity;
+    })
+    setTotalPrice(totalPrice);
+    setTotalQuantityCard(total) 
+    // setListCard(listcartd);
+    // setUpdateCart(!updateCart)
+  }
   useEffect(() => {
     console.log("province_code", addressProvince.province_code);
     if (addressProvince.province_code === -1) {
@@ -191,6 +211,7 @@ export default function Checkout() {
     refillInfoCheckout();
     fetchCity();
     getItemProductCart();
+    updateTotalCart();
   }, []);
   return (
     <DivParent className="position-relative">
@@ -244,7 +265,7 @@ export default function Checkout() {
 
               <Accordion defaultActiveKey="0" className="mt-4">
                 <Accordion.Item eventKey="0">
-                  <Accordion.Header>Giao tận nơi</Accordion.Header>
+                  <Accordion.Header>Giao tận nơi (thanh toán COD)</Accordion.Header>
                   <Accordion.Body>
                     <Row>
                       <Col md={12}>
@@ -290,7 +311,7 @@ export default function Checkout() {
                     </Row>
                   </Accordion.Body>
                 </Accordion.Item>
-                <Accordion.Item eventKey="1">
+                {/* <Accordion.Item eventKey="1">
                   <Accordion.Header>Nhận tại cửa hàng</Accordion.Header>
                   <Accordion.Body>
                     <Form>
@@ -320,7 +341,7 @@ export default function Checkout() {
                       </Form.Check>
                     </Form>
                   </Accordion.Body>
-                </Accordion.Item>
+                </Accordion.Item> */}
               </Accordion>
               <div className="d-flex justify-content-end mt-4">
                 <Button
@@ -373,7 +394,7 @@ export default function Checkout() {
                 <span className="label-bill fw-light">Tạm tính</span>
               </Col>
               <Col md={6} className="d-flex justify-content-end">
-                <span className="value-bill ">2,070,000₫</span>
+                <span className="value-bill ">{formatNumberThoundSand(totalPrice)}₫</span>
               </Col>
               <Col md={6}>
                 <span className="label-bill fw-light">Phí vận chuyển</span>
@@ -392,7 +413,7 @@ export default function Checkout() {
                 className="d-flex justify-content-end align-items-center"
               >
                 <small className="fw-light d-block  me-1">VND</small>
-                <strong>2,070,000₫</strong>
+                <strong>{formatNumberThoundSand(totalPrice)}₫</strong>
               </Col>
             </Row>
           </Col>
