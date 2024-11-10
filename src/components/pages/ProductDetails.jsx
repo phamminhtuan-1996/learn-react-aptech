@@ -279,7 +279,7 @@ export default function ProductDetails() {
             </h3>
             <div className="d-flex justify-content-between">
               <span>SKU: {dataProduct.sku}</span>
-              <span className="text-black-50">Hiện tại còn 32 sản phẩm.</span>
+              <span className="text-white">Hiện tại còn 32 sản phẩm.</span>
             </div>
             <strong>{formatNumberThoundSand(dataProduct.price)}₫</strong>{" "}
             <small className="text-decoration-line-through text-black-50">

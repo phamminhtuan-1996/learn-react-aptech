@@ -22,6 +22,11 @@ export default function ProductSearch() {
         product_name: {
             $contains: valSearch
         },
+        category_product : {
+          name: {
+            $contains: valSearch
+          }
+        }
       },
       field: ["product_name", "price", "thumbnail", "promotion_price"],
       populate: "thumbnail",
@@ -49,14 +54,14 @@ export default function ProductSearch() {
   return (
     <DivParent>
       <Container>
-        <form>
+        {/* <form> */}
           <Form.Control
             value={valSearch}
             placeholder="Nhập vào sản phẩm muốn tiền kiếm"
             className="rounded-pill mb-4"
             onChange={(e) => setValSearch(e.target.value)}
           ></Form.Control>
-        </form>
+        {/* </form> */}
 
         {listProduct.length === 0 && (
             <h4 className="text-center my-4">Vui lòng nhập từ khoá vào ô tìm kiếm để tìm sản phẩm mong muốn</h4>
