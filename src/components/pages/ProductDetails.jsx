@@ -144,7 +144,7 @@ export default function ProductDetails() {
     console.log('getListProductCart', getListProductCart)
     let result = getListProductCart.length > 0 ? JSON.parse(getListProductCart) : [];
     console.log('before' , result);
-    const indexHavedResult = result.findIndex((item) => item.id_variant === valColor);
+    const indexHavedResult = result.findIndex((item) => item.id_variant === valColor && item.size === valSize);
     if (indexHavedResult > -1) {
       result[indexHavedResult].quantity = result[indexHavedResult].quantity + Number(valQuantity);
       localStorage.setItem('list-cart', JSON.stringify(result));
@@ -205,7 +205,6 @@ export default function ProductDetails() {
   const checkWhiteList = () => {
     let getLocal = localStorage.getItem('whitelist');
     if (!getLocal) {
-      console.log('hahahaha')
       setWhiteList(false);
       return;
     }
@@ -280,7 +279,7 @@ export default function ProductDetails() {
             </h3>
             <div className="d-flex justify-content-between">
               <span>SKU: {dataProduct.sku}</span>
-              <span className="text-black-50">Hiện tại còn 32 sản phẩm.</span>
+              <span className="text-white">Hiện tại còn 32 sản phẩm.</span>
             </div>
             <strong>{formatNumberThoundSand(dataProduct.price)}₫</strong>{" "}
             <small className="text-decoration-line-through text-black-50">

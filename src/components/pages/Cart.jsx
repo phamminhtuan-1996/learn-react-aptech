@@ -14,9 +14,29 @@ export default function Cart() {
   const [totalQuanityCart, setTotalQuantityCard] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const {updateCart, setUpdateCart} = useContext(Context);
-  const handleRemoveItem = (id) => {
+
+  const countId = (data) => {
+    let count = 0;
+    listCart.forEach((item) => {
+      if (item.id_variant === data.id) {
+        count += 1;
+      }
+    })
+    return count > 1;
+  }
+  const handleRemoveItem = (val) => {
+    console.log('handleRemoveItem', val);
     setIsLoading(true);
-    const updatedListCart = listCart.filter((item) => item.id_variant !== id);
+    let updatedListCart = [];
+    if (countId) {
+      console.log('countid', val)
+      updatedListCart = listCart.filter(
+        (item) => !(item.id_variant === val.id && item.size === val.size)
+      );
+    } else {
+      updatedListCart = listCart.filter((item) => item.size !== val.size && item.id_variant !== val.id);
+    }
+
     setListCard([]);
     localStorage.setItem('list-cart', JSON.stringify(updatedListCart))
     setTimeout(() => {
